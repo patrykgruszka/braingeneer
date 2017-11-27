@@ -3,6 +3,7 @@ const browserify = require('browserify');
 const source = require('vinyl-source-stream');
 const gutil = require('gulp-util');
 const babelify = require('babelify');
+const sass = require('gulp-sass');
 
 // External dependencies you do not want to rebundle while developing,
 // but include in your application deployment
@@ -23,14 +24,21 @@ gulp.task('deploy', function (){
     bundleApp(true);
 });
 
+gulp.task('styles', function () {
+    return gulp.src('./client/stylesheets/**/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./client/public/dist/stylesheets'));
+});
+
 gulp.task('watch', function () {
     gulp.watch(['./client/app/**/*.js'], ['scripts']);
+    gulp.watch('./client/stylesheets/**/*.scss', ['styles']);
 });
 
 // When running 'gulp' on the terminal this task will fire.
 // It will start watching for changes in every .js file.
 // If there's a change, the task 'scripts' defined above will fire.
-gulp.task('default', ['scripts','watch']);
+gulp.task('default', ['scripts', 'styles', 'watch']);
 
 // Private Functions
 // ----------------------------------------------------------------------------
@@ -55,7 +63,7 @@ function bundleApp(isProduction) {
             .bundle()
             .on('error', gutil.log)
             .pipe(source('vendors.js'))
-            .pipe(gulp.dest('./client/public/dist/js/'));
+            .pipe(gulp.dest('./client/public/dist/scripts/'));
     }
     if (!isProduction){
         // make the dependencies external so they dont get bundled by the
@@ -72,5 +80,5 @@ function bundleApp(isProduction) {
         .bundle()
         .on('error',gutil.log)
         .pipe(source('bundle.js'))
-        .pipe(gulp.dest('./client/public/dist/js/'));
+        .pipe(gulp.dest('./client/public/dist/scripts/'));
 }

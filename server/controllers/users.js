@@ -6,6 +6,18 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
+
+/**
+ * Returns current user if logged
+ * @param request
+ * @param response
+ */
+exports.profile = function(request, response) {
+    const user = request.user || {};
+    response.json(user);
+};
+
+
 /**
  * Get users list
  * @param request
@@ -40,32 +52,6 @@ exports.create = function(request, response) {
                 result: result
             });
         }
-    });
-};
-
-/**
- * Login
- * @param request
- * @param response
- */
-exports.login = function(request, response) {
-    response.render('login', {
-        title: 'Login - Google Maps Generator',
-        errors: request.flash('error'),
-        info: request.flash('info'),
-        success: request.flash('success')
-    });
-};
-
-/**
- * Register
- * @param request
- * @param response
- */
-exports.signup = function(request, response) {
-    response.render('signup', {
-        title: 'New user registration - Google Maps Generator',
-        errors: request.flash('errors')
     });
 };
 

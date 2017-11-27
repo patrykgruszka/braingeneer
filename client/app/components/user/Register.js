@@ -1,6 +1,9 @@
 import React from 'react';
 import Navigation from '../layout/Navigation';
 import PageHeader from '../layout/PageHeader';
+import { browserHistory } from 'react-router';
+import request from '../../services/request';
+import alertify from 'alertify.js';
 
 class Login extends React.Component {
 
@@ -27,7 +30,7 @@ class Login extends React.Component {
     }
 
     handleSubmit(event) {
-        fetch('/api/users', {
+        request('/api/users', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -35,10 +38,12 @@ class Login extends React.Component {
             },
             credentials: 'include',
             body: JSON.stringify(this.state)
-        }).then(response => response.json())
-            .then(data => {
-                alert(data.message);
-            });
+        }).then(data => {
+            browserHistory.push('/login');
+            alertify.success(data.message);
+        }).catch(data => {
+            alertify.error(data.message);
+        });
         event.preventDefault();
     }
 
@@ -46,7 +51,7 @@ class Login extends React.Component {
         return (<div>
             <Navigation/>
             <PageHeader title="Register - braingeneer"/>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="container">
                 <div className="row">
                     <div className="col-sm-6">
                         <div className="form-group">

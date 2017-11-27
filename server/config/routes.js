@@ -18,6 +18,7 @@ module.exports = function(app, passport, express) {
 
     app.get('/', application.index);
     app.get('/login', application.index);
+    app.get('/logout', application.index);
     app.get('/register', application.index);
 
     // authentication
@@ -42,6 +43,7 @@ module.exports = function(app, passport, express) {
             });
         })(req, res, next);
     });
+    app.get('/api/profile', users.profile);
     app.get('/api/logout', users.logout);
 
     // users api

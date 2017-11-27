@@ -3,6 +3,7 @@ import Navigation from '../layout/Navigation';
 import PageHeader from '../layout/PageHeader';
 import { browserHistory } from 'react-router';
 import request from '../../services/request';
+import alertify from 'alertify.js';
 
 class Login extends React.Component {
 
@@ -39,9 +40,9 @@ class Login extends React.Component {
             body: JSON.stringify(this.state)
         }).then(data => {
             browserHistory.push('/');
-            alert(data.message);
+            alertify.success(data.message);
         }).catch(data => {
-            alert(data.message);
+            alertify.error(data.message);
         });
 
         event.preventDefault();
@@ -51,7 +52,7 @@ class Login extends React.Component {
         return (<div>
             <Navigation/>
             <PageHeader title="Login - braingeneer"/>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="container">
                 <div className="row">
                     <div className="col-sm-6">
                         <div className="form-group">
