@@ -5,6 +5,7 @@ import Index from './components/page/Index';
 import Login from './components/user/Login';
 import Logout from './components/user/Logout';
 import Register from './components/user/Register';
+import Profile from './components/user/Profile';
 
 render(
     <Router history={browserHistory}>
@@ -12,6 +13,7 @@ render(
         <Route path="/login" component={Login}/>
         <Route path="/logout" component={Logout}/>
         <Route path="/register" component={Register}/>
+        <Route path="/profile" component={Profile}/>
     </Router>,
     document.getElementById('app-container')
 );

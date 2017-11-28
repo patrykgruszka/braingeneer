@@ -20,6 +20,7 @@ module.exports = function(app, passport, express) {
     app.get('/login', application.index);
     app.get('/logout', application.index);
     app.get('/register', application.index);
+    app.get('/profile', application.index);
 
     // authentication
     app.post('/api/login', function(req, res, next) {
@@ -44,11 +45,11 @@ module.exports = function(app, passport, express) {
         })(req, res, next);
     });
     app.get('/api/profile', users.profile);
+    app.patch('/api/profile', users.updateProfile);
     app.get('/api/logout', users.logout);
 
     // users api
     app.get('/api/users', auth.requiresLogin, auth.hasAdminRole, users.list);
-    app.post('/api/users', users.create);
 
     app.use(express.static('client/public'));
 

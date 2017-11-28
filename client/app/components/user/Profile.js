@@ -1,23 +1,36 @@
 import React from 'react';
 import Navigation from '../layout/Navigation';
 import PageHeader from '../layout/PageHeader';
-import { browserHistory } from 'react-router';
 import request from '../../services/request';
 import alertify from 'alertify.js';
 
-class Login extends React.Component {
+class Profile extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             email: '',
-            password: '',
-            role: ''
+            name: ''
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        const component = this;
+
+        request('/api/profile', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include'
+        }).then(user => {
+            component.setState(user);
+        });
     }
 
     handleInputChange(event) {
@@ -31,8 +44,8 @@ class Login extends React.Component {
     }
 
     handleSubmit(event) {
-        request('/api/users', {
-            method: 'POST',
+        request('/api/profile', {
+            method: 'PATCH',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -40,42 +53,31 @@ class Login extends React.Component {
             credentials: 'include',
             body: JSON.stringify(this.state)
         }).then(data => {
-            browserHistory.push('/login');
             alertify.success(data.message);
         }).catch(data => {
             alertify.error(data.message);
         });
+
         event.preventDefault();
     }
 
     render(){
         return (<div>
             <Navigation/>
-            <PageHeader title="Register - braingeneer"/>
+            <PageHeader title={'Profile - ' + this.state.email}/>
             <form onSubmit={this.handleSubmit} className="container">
                 <div className="row">
-                    <div className="col-sm-6">
+                    <div className="col-xs-12 col-sm-6">
                         <div className="form-group">
-                            <label htmlFor="login-email-input">Address e-mail</label>
-                            <input type="email" name="email" className="form-control" id="login-email-input"
-                                   value={this.props.email}
-                                   onChange={this.handleInputChange} />
+                            <label htmlFor="profile-email-input">Address e-mail</label>
+                            <input type="email" name="email" className="form-control" id="profile-email-input"
+                                   value={this.state.email} disabled />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="login-password-input">Password</label>
-                            <input type="password" name="password" className="form-control" id="login-password-input"
-                                   value={this.props.password}
+                            <label htmlFor="profile-name-input">Name</label>
+                            <input name="name" className="form-control" id="profile-name-input"
+                                   value={this.state.name}
                                    onChange={this.handleInputChange} />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="login-role-input">Role</label>
-                            <select name="role" className="form-control" id="login-role-input"
-                                   value={this.props.role}
-                                   onChange={this.handleInputChange}>
-                                <option value="user">User</option>
-                                <option value="supervisor">Supervisor</option>
-                                <option value="admin">Admin</option>
-                            </select>
                         </div>
                         <div>
                             <button type="submit" className="btn btn-success">Submit</button>
@@ -87,4 +89,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default Profile;
