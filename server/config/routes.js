@@ -5,6 +5,7 @@
  */
 const application = require('../controllers/app');
 const users = require('../controllers/users');
+const logs = require('../controllers/logs');
 const auth = require('./middlewares/authorization');
 
 /**
@@ -23,33 +24,16 @@ module.exports = function(app, passport, express) {
     app.get('/profile', application.index);
 
     // authentication
-    app.post('/api/login', function(req, res, next) {
-        pauth('local', function(err, user, info) {
-            const error = err || info;
-            if(error) {
-                return res.status(401).json(error);
-            }
-            if(!user) {
-                return res.status(404).json({message: 'Something went wrong, please try again.'});
-            }
-
-            req.logIn(user, function(err) {
-                if (err) {
-                    return res.status(500).json({message: 'Something went wrong, please try again.'});
-                }
-                return res.json({
-                    message: 'Authorization successful',
-                    detail: info
-                });
-            });
-        })(req, res, next);
-    });
+    app.post('/api/login', users.login);
     app.get('/api/profile', users.profile);
     app.patch('/api/profile', users.updateProfile);
     app.get('/api/logout', users.logout);
 
     // users api
     app.get('/api/users', auth.requiresLogin, auth.hasAdminRole, users.list);
+
+    // logs api
+    app.get('/api/logs', auth.requiresLogin, auth.hasAdminRole, logs.list);
 
     app.use(express.static('client/public'));
 

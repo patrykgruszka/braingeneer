@@ -131,7 +131,7 @@ UserSchema.statics = {
      * @api private
      */
     load: function (options, cb) {
-        options.select = options.select || 'email name username role';
+        options.select = options.select || 'email name role';
         return this.findOne(options.criteria)
             .select(options.select)
             .exec(cb);
