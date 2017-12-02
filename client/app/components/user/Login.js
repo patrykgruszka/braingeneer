@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Navigation from '../layout/Navigation';
 import PageHeader from '../layout/PageHeader';
-import { browserHistory } from 'react-router';
+import {browserHistory} from 'react-router';
 import request from '../../services/request';
+import translate from '../../i18n/translate.js';
 import alertify from 'alertify.js';
 
 class Login extends React.Component {
@@ -48,27 +50,27 @@ class Login extends React.Component {
         event.preventDefault();
     }
 
-    render(){
+    render() {
         return (<div>
             <Navigation/>
-            <PageHeader title="Login - braingeneer"/>
+            <PageHeader title={this.props.strings.pageTitle}/>
             <form onSubmit={this.handleSubmit} className="container">
                 <div className="row">
                     <div className="col-sm-6">
                         <div className="form-group">
-                            <label htmlFor="login-email-input">Address e-mail</label>
+                            <label htmlFor="login-email-input">{this.props.strings.email}</label>
                             <input type="email" name="email" className="form-control" id="login-email-input"
                                    value={this.props.email}
-                                   onChange={this.handleInputChange} />
+                                   onChange={this.handleInputChange}/>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="login-password-input">Password</label>
+                            <label htmlFor="login-password-input">{this.props.strings.password}</label>
                             <input type="password" name="password" className="form-control" id="login-password-input"
                                    value={this.props.password}
-                                   onChange={this.handleInputChange} />
+                                   onChange={this.handleInputChange}/>
                         </div>
                         <div>
-                            <button type="submit" className="btn btn-success">Submit</button>
+                            <button type="submit" className="btn btn-success">{this.props.strings.submit}</button>
                         </div>
                     </div>
                 </div>
@@ -77,4 +79,17 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+Login.propTypes = {
+    strings: PropTypes.object
+};
+
+Login.defaultProps = {
+    strings: {
+        pageTitle: 'Login',
+        email: 'Address e-mail',
+        password: 'Password',
+        submit: 'Submit'
+    }
+};
+
+export default translate('user/Login')(Login);

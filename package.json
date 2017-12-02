@@ -24,6 +24,7 @@
     "morgan": "~1.7.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "prop-types": "^15.6.0",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",

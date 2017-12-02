@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Navigation from '../layout/Navigation';
 import PageHeader from '../layout/PageHeader';
 import request from '../../services/request';
+import translate from '../../i18n/translate';
 import alertify from 'alertify.js';
 
 class Profile extends React.Component {
@@ -64,23 +66,23 @@ class Profile extends React.Component {
     render(){
         return (<div>
             <Navigation/>
-            <PageHeader title={'Profile - ' + this.state.email}/>
+            <PageHeader title={this.props.strings.profile + ' - ' + this.state.email}/>
             <form onSubmit={this.handleSubmit} className="container">
                 <div className="row">
                     <div className="col-xs-12 col-sm-6">
                         <div className="form-group">
-                            <label htmlFor="profile-email-input">Address e-mail</label>
+                            <label htmlFor="profile-email-input">{this.props.strings.email}</label>
                             <input type="email" name="email" className="form-control" id="profile-email-input"
                                    value={this.state.email} disabled />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="profile-name-input">Name</label>
+                            <label htmlFor="profile-name-input">{this.props.strings.name}</label>
                             <input name="name" className="form-control" id="profile-name-input"
                                    value={this.state.name}
                                    onChange={this.handleInputChange} />
                         </div>
                         <div>
-                            <button type="submit" className="btn btn-success">Submit</button>
+                            <button type="submit" className="btn btn-success">{this.props.strings.submit}</button>
                         </div>
                     </div>
                 </div>
@@ -89,4 +91,17 @@ class Profile extends React.Component {
     }
 }
 
-export default Profile;
+Profile.propTypes = {
+    strings: PropTypes.object
+};
+
+Profile.defaultProps = {
+    strings: {
+        profile: 'Profile',
+        email: 'Address e-mail',
+        name: 'Name',
+        submit: 'Submit'
+    }
+};
+
+export default translate('user/Profile')(Profile);
