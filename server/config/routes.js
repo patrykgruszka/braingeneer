@@ -6,6 +6,7 @@
 const application = require('../controllers/app');
 const users = require('../controllers/users');
 const logs = require('../controllers/logs');
+const exercises = require('../controllers/exercises');
 const auth = require('./middlewares/authorization');
 
 /**
@@ -34,6 +35,9 @@ module.exports = function(app, passport, express) {
 
     // logs api
     app.get('/api/logs', auth.requiresLogin, auth.hasAdminRole, logs.list);
+
+    // exercises api
+    app.get('/api/exercises', exercises.list);
 
     app.use(express.static('client/public'));
 

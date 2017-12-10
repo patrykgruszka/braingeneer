@@ -59,6 +59,10 @@ UserNavigation.propTypes = {
 };
 
 UserNavigation.defaultProps = {
+
+};
+
+UserNavigation.defaultProps = {
     strings: {
         hello: 'Helloooo',
         logout: 'Logout',

@@ -2,6 +2,9 @@ export default {
     'page/Index': {
         pageTitle: 'Dzień dobry'
     },
+    'layout/Navigation': {
+        exercises: 'Ćwiczenia'
+    },
     'layout/UserNavigation': {
         hello: 'Cześć',
         logout: 'Wyloguj się',
@@ -28,5 +31,9 @@ export default {
         email: 'Adres e-mail',
         name: 'Imię',
         submit: 'Zatwierdź'
+    },
+    'exercise/ExerciseCard': {
+        difficulty: 'Poziom',
+        bounty: 'Nagroda'
     }
 };

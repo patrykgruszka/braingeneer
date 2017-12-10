@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Navigation from '../layout/Navigation';
 import PageHeader from '../layout/PageHeader';
+import ExercisesList from '../exercise/ExerciseList';
 import translate from '../../i18n/translate.js';
 
 class Index extends React.Component {
@@ -9,6 +10,7 @@ class Index extends React.Component {
         return (<div>
             <Navigation/>
             <PageHeader title={ this.props.strings.pageTitle }/>
+            <ExercisesList/>
         </div>);
     }
 }

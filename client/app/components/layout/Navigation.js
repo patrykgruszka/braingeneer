@@ -1,8 +1,11 @@
 import React from 'react';
-import request from '../../services/request';
+import PropTypes from 'prop-types';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
+import {Link} from 'react-router';
 import {LinkContainer} from 'react-router-bootstrap';
 import UserNavigation from './UserNavigation';
+import request from '../../services/request';
+import translate from '../../i18n/translate.js';
 
 class Navigation extends React.Component {
 
@@ -33,14 +36,12 @@ class Navigation extends React.Component {
         return (<Navbar inverse={true}>
             <Navbar.Header>
                 <Navbar.Brand>
-                    <a href="#">Braingeneer</a>
+                    <Link to="/">Braingeneer</Link>
                 </Navbar.Brand>
             </Navbar.Header>
-            <div>
-            </div>
             <Nav>
                 <LinkContainer to={{pathname: '/'}}>
-                    <NavItem eventKey={1} href="#">Index</NavItem>
+                    <NavItem eventKey={1} href="#">{this.props.strings.exercises}</NavItem>
                 </LinkContainer>
             </Nav>
             <UserNavigation user={this.state.user}/>
@@ -48,4 +49,14 @@ class Navigation extends React.Component {
     }
 }
 
-export default Navigation;
+Navigation.propTypes = {
+    strings: PropTypes.object
+};
+
+UserNavigation.defaultProps = {
+    strings: {
+        exercises: 'Exercises'
+    }
+};
+
+export default translate('layout/Navigation')(Navigation);
