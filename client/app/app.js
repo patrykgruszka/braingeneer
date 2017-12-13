@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom'
 import { Router, Route, browserHistory } from 'react-router';
 import Index from './components/page/Index';
+import Exercise from './components/exercise/Exercise';
 import Login from './components/user/Login';
 import Logout from './components/user/Logout';
 import Register from './components/user/Register';
@@ -14,6 +15,7 @@ render(
         <Route path="/logout" component={Logout}/>
         <Route path="/register" component={Register}/>
         <Route path="/profile" component={Profile}/>
+        <Route path="/exercise/:exerciseId" component={Exercise}/>
     </Router>,
     document.getElementById('app-container')
 );

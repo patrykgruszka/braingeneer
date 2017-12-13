@@ -32,8 +32,13 @@ export default {
         name: 'Imię',
         submit: 'Zatwierdź'
     },
+    'exercise/Exercise': {
+        pageTitle: 'Ćwiczenie'
+    },
+    'exercise/ExerciseList': {},
     'exercise/ExerciseCard': {
-        difficulty: 'Poziom',
+        difficulty: 'Trudność',
         bounty: 'Nagroda'
-    }
+    },
+    'exercise/Quiz': {}
 };

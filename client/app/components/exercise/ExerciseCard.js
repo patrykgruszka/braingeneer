@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router';
 import translate from '../../i18n/translate.js';
 
 class ExerciseCard extends React.Component {
@@ -10,7 +11,7 @@ class ExerciseCard extends React.Component {
     render() {
         let exercise = this.props.exercise;
         return (
-            <div className="exercise-card">
+            <Link className="exercise-card" to={`/exercise/${exercise._id}`}>
                 <div className="exercise-card-header">
                     <img src="http://via.placeholder.com/262x100" alt={exercise.name} className="exercise-card-img" />
                 </div>
@@ -19,7 +20,7 @@ class ExerciseCard extends React.Component {
                     <div className="exercise-card-difficulty">{this.props.strings.difficulty}: {exercise.difficulty}</div>
                     <div className="exercise-card-bounty">{this.props.strings.bounty}: {exercise.bounty}</div>
                 </div>
-            </div>
+            </Link>
         );
     }
 }

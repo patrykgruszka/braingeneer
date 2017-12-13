@@ -23,6 +23,7 @@ module.exports = function(app, passport, express) {
     app.get('/logout', application.index);
     app.get('/register', application.index);
     app.get('/profile', application.index);
+    app.get('/exercise*', application.index);
 
     // authentication
     app.post('/api/login', users.login);
@@ -38,6 +39,7 @@ module.exports = function(app, passport, express) {
 
     // exercises api
     app.get('/api/exercises', exercises.list);
+    app.get('/api/exercises/:exerciseId', exercises.getById);
 
     app.use(express.static('client/public'));
 
