@@ -13,7 +13,11 @@ const ExerciseSchema = Schema({
     'lang': String,
     'difficulty': {type: Number, min: 1, max: 3},
     'bounty': {type: Number, min: 0},
-    'data': Schema.Types.Mixed
+    'data': Schema.Types.Mixed,
+    'stats': {
+        'started': {type: Number, min: 0},
+        'completed': {type: Number, min: 0}
+    }
 });
 
 mongoose.model('Exercise', ExerciseSchema);

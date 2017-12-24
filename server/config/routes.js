@@ -6,6 +6,7 @@
 const application = require('../controllers/app');
 const users = require('../controllers/users');
 const logs = require('../controllers/logs');
+const scores = require('../controllers/scores');
 const exercises = require('../controllers/exercises');
 const auth = require('./middlewares/authorization');
 
@@ -34,12 +35,17 @@ module.exports = function(app, passport, express) {
     // users api
     app.get('/api/users', auth.requiresLogin, auth.hasAdminRole, users.list);
 
+    // scores api
+    app.get('/api/scores', auth.requiresLogin, auth.hasAdminRole, scores.list);
+
     // logs api
     app.get('/api/logs', auth.requiresLogin, auth.hasAdminRole, logs.list);
 
     // exercises api
     app.get('/api/exercises', exercises.list);
     app.get('/api/exercises/:exerciseId', exercises.getById);
+    app.get('/api/exercises/:exerciseId/start', exercises.start);
+    app.post('/api/exercises/:exerciseId/complete', exercises.complete);
 
     app.use(express.static('client/public'));
 

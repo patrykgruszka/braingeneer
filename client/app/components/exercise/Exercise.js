@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Navigation from '../layout/Navigation';
 import PageHeader from '../layout/PageHeader';
+import ExerciseHeader from './ExerciseHeader';
 import translate from '../../i18n/translate.js';
 import request from '../../services/request';
-import Quiz from './Quiz';
+import Quiz from './quiz/Quiz';
 
 class Exercise extends React.Component {
 
@@ -44,7 +45,7 @@ class Exercise extends React.Component {
     render(){
         return (<div>
             <Navigation/>
-            <PageHeader title={ `${this.props.strings.pageTitle}: ${this.state.exercise.name}` }/>
+            <ExerciseHeader exercise={this.state.exercise} />
             {this.exerciseFactory()}
         </div>);
     }
@@ -58,9 +59,7 @@ Exercise.propTypes = {
 };
 
 Exercise.defaultProps = {
-    strings: {
-        pageTitle: 'Exercise'
-    }
+    strings: {}
 };
 
 export default translate('exercise/Exercise')(Exercise);

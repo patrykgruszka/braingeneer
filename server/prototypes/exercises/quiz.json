@@ -8,27 +8,67 @@
     "questions": [
       {
         "question": "Ubranie odpowiednie na basen, to",
-        "options": ["Koszula i spodnie", "Strój kąpielowy", "Sukienka", "Garnitur"],
+        "options": [{
+          "name": "Garnitur"
+        },{
+          "name": "Strój kąpielowy"
+        },{
+          "name": "Sukienka"
+        }, {
+          "name": "Garnitur"
+        }],
         "answer": 1
       },
       {
         "question": "Zwierze, które daje mleko, to",
-        "options": ["Indyk", "Kura", "Pies", "Krowa"],
+        "options": [{
+          "name": "Indyk"
+        },{
+          "name": "Kura"
+        },{
+          "name": "Pies"
+        }, {
+          "name": "Krowa"
+        }],
         "answer": 3
       },
       {
         "question": "W którym mieście znajduje się Wawel?",
-        "options": ["Wrocław", "Gdańsk", "Kraków", "Warszawa"],
+        "options": [{
+          "name": "Wrocław"
+        },{
+          "name": "Gdańsk"
+        },{
+          "name": "Kraków"
+        }, {
+          "name": "Warszawa"
+        }],
         "answer": 2
       },
       {
         "question": "Zwierze, które znosi jajka, to",
-        "options": ["Kura", "Koń", "Kot", "Świnia"],
+        "options": [{
+          "name": "Kura"
+        },{
+          "name": "Koń"
+        },{
+          "name": "Kot"
+        }, {
+          "name": "Świnia"
+        }],
         "answer": 0
       },
       {
         "question": "Godzina składa się z",
-        "options": ["45 minut", "60 minut", "60 sekund", "15 sekund"],
+        "options": [{
+          "name": "45 minut"
+        },{
+          "name": "60 minut"
+        },{
+          "name": "60 sekund"
+        }, {
+          "name": "15 sekund"
+        }],
         "answer": 1
       }
     ]

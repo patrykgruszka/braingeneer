@@ -5,7 +5,6 @@
  */
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-
 const Schema = mongoose.Schema;
 
 /**
@@ -15,11 +14,6 @@ const UserSchema = new Schema({
     name: {type: String, default: ''},
     email: {type: String, default: ''},
     role: {type: String, default: 'user'},
-    scores: [{
-        exercise: Schema.Types.ObjectId,
-        score: {type: Number, default: 0, min: 0},
-        date: Date
-    }],
 
     // sensitive data
     hashed_password: {type: String, default: ''},

@@ -1,3 +1,9 @@
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 
+@import "components/label";
+@import "components/brick";
+
+@import "components/exercise/exercise";
+@import "components/exercise/exercise-header";
 @import "components/exercise/exercise-card";
+@import "components/exercise/quiz";

@@ -1,0 +1,16 @@
+'use strict';
+/**
+ * Module dependencies.
+ */
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const ScoreSchema = Schema({
+    _exerciseId: Schema.Types.ObjectId,
+    _userId: Schema.Types.ObjectId,
+    score: {type: Number, default: 0, min: 0},
+    details: Schema.Types.Mixed,
+    date: {type: Date, default: Date.now}
+});
+
+mongoose.model('Score', ScoreSchema);

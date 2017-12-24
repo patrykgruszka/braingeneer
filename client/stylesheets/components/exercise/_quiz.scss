@@ -1,0 +1,19 @@
+.exercise-quiz {
+  max-width: 600px;
+  padding: 30px 0;
+
+  .question-number {
+    @extend .label;
+    @extend .label-default;
+    font-size: 16px;
+  }
+
+  .question-title {
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+
+  ol.question-options {
+    padding: 0;
+  }
+}

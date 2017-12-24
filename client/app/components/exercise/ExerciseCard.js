@@ -17,8 +17,10 @@ class ExerciseCard extends React.Component {
                 </div>
                 <div className="exercise-card-content">
                     <h3 className="exercise-card-title">{exercise.name}</h3>
-                    <div className="exercise-card-difficulty">{this.props.strings.difficulty}: {exercise.difficulty}</div>
-                    <div className="exercise-card-bounty">{this.props.strings.bounty}: {exercise.bounty}</div>
+                    <p>
+                        <span className={`exercise-difficulty-label exercise-difficulty-label--${exercise.difficulty}`}>{this.props.strings.difficulty}: {exercise.difficulty}</span><br />
+                        <span className="exercise-bounty-label">{this.props.strings.bounty}: {exercise.bounty}</span>
+                    </p>
                 </div>
             </Link>
         );

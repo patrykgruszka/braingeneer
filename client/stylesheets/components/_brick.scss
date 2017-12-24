@@ -1,0 +1,37 @@
+.brick {
+  display: block;
+  padding: 15px 40px;
+  border: 2px solid #ccc;
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+
+  + .brick {
+    margin-top: 10px;
+  }
+
+  &:hover {
+    background-color: darken(#fff, 5%);
+  }
+
+  &-selected,
+  &-disabled {
+    cursor: default;
+    background-color: #fff !important;
+  }
+
+  &-success {
+    border-color: $brand-success;
+    color: $brand-success;
+  }
+
+  &-error {
+    border-color: $brand-danger;
+    color: $brand-danger;
+  }
+
+  &-disabled {
+    opacity: 0.5;
+  }
+}

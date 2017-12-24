@@ -32,13 +32,24 @@ export default {
         name: 'Imię',
         submit: 'Zatwierdź'
     },
-    'exercise/Exercise': {
-        pageTitle: 'Ćwiczenie'
-    },
+    'exercise/Exercise': {},
     'exercise/ExerciseList': {},
+    'exercise/ExerciseHeader': {
+        exercise: 'Ćwiczenie',
+        difficulty: 'Trudność',
+        bounty: 'Nagroda'
+    },
     'exercise/ExerciseCard': {
         difficulty: 'Trudność',
         bounty: 'Nagroda'
     },
-    'exercise/Quiz': {}
+    'exercise/quiz/Quiz': {
+        question: 'Pytanie',
+        nextQuestion: 'Następne pytanie',
+        finish: 'Zakończ'
+    },
+    'exercise/quiz/Question': {
+        successMessage: 'Gratulacje, dobra odpowiedź!',
+        errorMessage: 'To nie jest poprawna odpowiedź. Spróbuj jeszcze raz.'
+    }
 };

@@ -1,0 +1,13 @@
+.exercise-difficulty-label {
+  @extend .label;
+  @extend .label-default;
+
+  &--1 {
+    @extend .label-success;
+  }
+}
+
+.exercise-bounty-label {
+  @extend .label;
+  @extend .label-primary;
+}
