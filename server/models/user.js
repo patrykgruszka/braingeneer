@@ -16,6 +16,7 @@ const UserSchema = new Schema({
     role: {type: String, default: 'user'},
 
     supervisor: {type: Schema.Types.ObjectId, ref: 'User'},
+    score: {type: Number, default: 0, min: 0},
 
     // sensitive data
     hashed_password: {type: String, default: ''},
@@ -134,7 +135,7 @@ UserSchema.statics = {
      * @api private
      */
     load: function (options, cb) {
-        options.select = options.select || 'email name role';
+        options.select = options.select || 'email name role score';
         return this.findOne(options.criteria)
             .select(options.select)
             .exec(cb);

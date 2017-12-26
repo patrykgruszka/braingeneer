@@ -16,7 +16,7 @@ const pauth = passport.authenticate.bind(passport);
  * @param response
  */
 exports.list = function (request, response) {
-    const query = User.find({}).select('name email username role');
+    const query = User.find({}).select('name email role score');
 
     query.exec(function (error, docs) {
         if (error) {
@@ -149,36 +149,6 @@ exports.updateProfile = function (req, res) {
             message: 'User profile was successfully updated'
         });
     });
-};
-
-/**
- * Get logged user score
- * @param req
- * @param res
- */
-exports.myScore = function (req, res) {
-    if (req.user) {
-        Score.aggregate([
-            {
-                $match: {user: req.user._id}
-            }, {
-                $group: {
-                    _id: null,
-                    score: {$sum: "$score"},
-                }
-            }
-        ], function (err, result) {
-            if (err) return res.send(500, {error: err});
-            const score = result.length ? result[0].score : 0;
-            res.json({
-                score: score
-            });
-        });
-    } else {
-        res.json({
-            score: 0
-        });
-    }
 };
 
 /**

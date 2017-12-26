@@ -33,7 +33,6 @@ module.exports = function(app, passport, express) {
 
     // my
     app.get('/api/my/profile', users.profile);
-    app.get('/api/my/score', users.myScore);
     app.get('/api/my/patients', users.myPatients);
     app.patch('/api/my/profile', users.updateProfile);
     app.post('/api/my/patients', auth.hasSupervisorRole, users.addPatient);

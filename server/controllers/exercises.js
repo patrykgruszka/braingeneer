@@ -4,6 +4,8 @@
  * Module dependencies.
  */
 const mongoose = require('mongoose');
+const async = require('async');
+const User = mongoose.model('User');
 const Exercise = mongoose.model('Exercise');
 const Score = mongoose.model('Score');
 
@@ -87,16 +89,20 @@ exports.complete = function (req, res) {
         scoreData.user = user._id;
     }
 
-    Exercise.findOneAndUpdate({ _id: exerciseId }, { $inc: { 'stats.completed': 1 }},  function() {
-        Score.create(scoreData, function (err, score) {
-            if (err) {
-                res.status(500).send({message: err});
-            } else {
-                res.send({
-                    score: score,
-                    message: 'Congratulations!'
-                });
-            }
+    async.parallel([
+        function(cb) {
+            User.findOneAndUpdate({ _id: user._id }, { $inc: { 'score': score }}, cb);
+        },
+        function(cb) {
+            Exercise.findOneAndUpdate({ _id: exerciseId }, { $inc: { 'stats.completed': 1 }}, cb);
+        },
+        function(cb) {
+            Score.create(scoreData, cb);
+        }
+    ], function(err) {
+        if (err) res.status(500).send({message: err});
+        res.send({
+            message: 'Congratulations!'
         });
     });
 };

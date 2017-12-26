@@ -36,7 +36,7 @@ class UserNavigation extends React.Component {
         if (user && user.email) {
             components.push(
                 <LinkContainer key="score" to={{pathname: '/scores'}}>
-                    <NavItem eventKey={1} href="#"><UserScore/></NavItem>
+                    <NavItem eventKey={1} href="#"><UserScore score={user.score} /></NavItem>
                 </LinkContainer>,
                 <NavDropdown key="user-dropdown" eventKey={2} title={`${this.props.strings.hello}, ${user.email}`} id="user-nav-dropdown">
                     <LinkContainer to={{pathname: '/profile'}}>
