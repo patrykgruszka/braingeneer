@@ -8,17 +8,17 @@ const Score = mongoose.model('Score');
 
 /**
  * Get scores list
- * @param request
- * @param response
+ * @param req
+ * @param res
  */
-exports.list = function (request, response) {
+exports.list = function (req, res) {
     const query = Score.find({});
 
-    query.exec(function (error, docs) {
-        if (error) {
-            response.status(500).send({message: 'There was a problem with getting scores from the database:' + error});
+    query.exec(function (err, docs) {
+        if (err) {
+            res.status(500).send({message: 'There was a problem with getting scores from the database:' + err});
         } else {
-            response.json(docs);
+            res.json(docs);
         }
     });
 };

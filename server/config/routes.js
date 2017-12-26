@@ -29,6 +29,7 @@ module.exports = function(app, passport, express) {
     // authentication
     app.post('/api/login', users.login);
     app.get('/api/profile', users.profile);
+    app.get('/api/my-score', users.myScore);
     app.patch('/api/profile', users.updateProfile);
     app.get('/api/logout', users.logout);
 

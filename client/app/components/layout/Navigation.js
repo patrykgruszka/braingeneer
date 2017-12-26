@@ -28,12 +28,12 @@ class Navigation extends React.Component {
             },
             credentials: 'include'
         }).then(user => {
-            component.setState({user: user});
+            component.setState({...component.state, user: user});
         });
     }
 
     render() {
-        return (<Navbar inverse={true}>
+        return (<Navbar inverse={true} className="navigation">
             <Navbar.Header>
                 <Navbar.Brand>
                     <Link to="/">Braingeneer</Link>
@@ -53,7 +53,7 @@ Navigation.propTypes = {
     strings: PropTypes.object
 };
 
-UserNavigation.defaultProps = {
+Navigation.defaultProps = {
     strings: {
         exercises: 'Exercises'
     }

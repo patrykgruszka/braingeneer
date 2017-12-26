@@ -1,7 +1,12 @@
+@import "common/variables";
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
 
 @import "components/label";
 @import "components/brick";
+
+@import "components/layout/navigation";
+@import "components/layout/user-score";
 
 @import "components/exercise/exercise";
 @import "components/exercise/exercise-header";

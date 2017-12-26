@@ -6,6 +6,7 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Score = mongoose.model('Score');
 const Log = mongoose.model('Log');
 const pauth = passport.authenticate.bind(passport);
 
@@ -148,4 +149,34 @@ exports.logout = function (request, response) {
     response.json({
         message: 'Logged out'
     })
+};
+
+/**
+ * Get logged user score
+ * @param req
+ * @param res
+ */
+exports.myScore = function (req, res) {
+    if (req.user) {
+        Score.aggregate([
+            {
+                $match: {_userId: req.user._id}
+            }, {
+                $group: {
+                    _id: null,
+                    score: {$sum: "$score"},
+                }
+            }
+        ], function (err, result) {
+            if (err) return res.send(500, {error: err});
+            const score = result[0].score || 0;
+            res.json({
+                score: score
+            });
+        });
+    } else {
+        res.json({
+            score: 0
+        });
+    }
 };

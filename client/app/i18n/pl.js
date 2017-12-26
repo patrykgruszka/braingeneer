@@ -9,7 +9,8 @@ export default {
         hello: 'Cześć',
         logout: 'Wyloguj się',
         login: 'Zaloguj się',
-        register: 'Rejestracja'
+        register: 'Rejestracja',
+        profile: 'Profil'
     },
     'user/Login': {
         pageTitle: 'Zaloguj się',
