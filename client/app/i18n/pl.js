@@ -10,7 +10,8 @@ export default {
         logout: 'Wyloguj się',
         login: 'Zaloguj się',
         register: 'Rejestracja',
-        profile: 'Profil'
+        profile: 'Profil',
+        patients: 'Pacjenci'
     },
     'user/Login': {
         pageTitle: 'Zaloguj się',
@@ -32,6 +33,22 @@ export default {
         email: 'Adres e-mail',
         name: 'Imię',
         submit: 'Zatwierdź'
+    },
+    'user/Patients': {
+        pageTitle: 'Twoi pacjenci',
+        noPatientsText: 'Lista twoich pacjentów jest pusta.',
+        name: 'Nazwa',
+        email: 'E-mail',
+        actions: 'Akcje',
+        undefined: '---',
+        addPatient: 'Dodaj pacjenta'
+    },
+    'user/AddPatient': {
+        pageTitle: 'Dodaj nowego pacjenta',
+        name: 'Nazwa',
+        email: 'Adres e-mail',
+        password: 'Hasło',
+        submit: 'Dodaj'
     },
     'exercise/Exercise': {},
     'exercise/ExerciseList': {},

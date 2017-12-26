@@ -15,6 +15,8 @@ const UserSchema = new Schema({
     email: {type: String, default: ''},
     role: {type: String, default: 'user'},
 
+    supervisor: {type: Schema.Types.ObjectId, ref: 'User'},
+
     // sensitive data
     hashed_password: {type: String, default: ''},
     salt: {type: String, default: ''},
@@ -47,7 +49,7 @@ UserSchema.path('email').validate(function (email, fn) {
 
     // Check only when it is a new user or when email field is modified
     if (this.isNew || this.isModified('email')) {
-        User.find({ email: email }).exec(function (err, users) {
+        User.find({email: email}).exec(function (err, users) {
             fn(!err && users.length === 0);
         });
     } else fn(true);

@@ -10,36 +10,6 @@ const Score = mongoose.model('Score');
 const Log = mongoose.model('Log');
 const pauth = passport.authenticate.bind(passport);
 
-
-/**
- * Returns current user if logged
- * @param request
- * @param response
- */
-exports.profile = function (request, response) {
-    const user = request.user || {};
-    response.json(user);
-};
-
-/**
- * Create user
- * @param req
- * @param res
- */
-exports.updateProfile = function (req, res) {
-    const query = {'email': req.user.email};
-    const newData = {
-        name: req.body.name
-    };
-
-    User.findOneAndUpdate(query, newData, {upsert: false}, function (err, user) {
-        if (err) return res.send(500, {error: err});
-        return res.json({
-            message: 'User profile was successfully updated'
-        });
-    });
-};
-
 /**
  * Get users list
  * @param request
@@ -89,8 +59,9 @@ function handleLoginError(err, code, message, req, res) {
             status: 'error',
             details: Object.assign({'email': req.body.email}, err)
         };
+
         if (!userErr && user) {
-            logData._userId = user._id;
+            logData.user = user._id;
         }
 
         Log.create(logData);
@@ -101,7 +72,7 @@ function handleLoginError(err, code, message, req, res) {
 
 function handleLoginSuccess(user, req, res) {
     Log.create({
-        _userId: user._id,
+        user: user._id,
         event: 'login',
         status: 'success'
     });
@@ -136,12 +107,12 @@ exports.login = function (req, res, next) {
  * @param response
  */
 exports.logout = function (request, response) {
-    const userId = request.user._userId;
+    const userId = request.user._id;
 
     request.logout();
 
     Log.create({
-        _userId: userId,
+        user: userId,
         event: 'logout',
         status: 'success'
     });
@@ -149,6 +120,35 @@ exports.logout = function (request, response) {
     response.json({
         message: 'Logged out'
     })
+};
+
+/**
+ * Returns current user if logged
+ * @param request
+ * @param response
+ */
+exports.profile = function (request, response) {
+    const user = request.user || {};
+    response.json(user);
+};
+
+/**
+ * Create user
+ * @param req
+ * @param res
+ */
+exports.updateProfile = function (req, res) {
+    const query = {_id: req.user._id};
+    const newData = {
+        name: req.body.name
+    };
+
+    User.findOneAndUpdate(query, newData, {upsert: false}, function (err) {
+        if (err) return res.send(500, {error: err});
+        return res.json({
+            message: 'User profile was successfully updated'
+        });
+    });
 };
 
 /**
@@ -160,7 +160,7 @@ exports.myScore = function (req, res) {
     if (req.user) {
         Score.aggregate([
             {
-                $match: {_userId: req.user._id}
+                $match: {user: req.user._id}
             }, {
                 $group: {
                     _id: null,
@@ -169,7 +169,7 @@ exports.myScore = function (req, res) {
             }
         ], function (err, result) {
             if (err) return res.send(500, {error: err});
-            const score = result[0].score || 0;
+            const score = result.length ? result[0].score : 0;
             res.json({
                 score: score
             });
@@ -179,4 +179,42 @@ exports.myScore = function (req, res) {
             score: 0
         });
     }
+};
+
+/**
+ * Get logged user patients list
+ * @param req
+ * @param res
+ */
+exports.myPatients = function (req, res) {
+    User
+        .find({supervisor: req.user._id})
+        .exec(function (err, patients) {
+            if (err) return res.send(500, {error: err});
+            res.json(patients);
+        });
+};
+
+/**
+ * Add new patient
+ * @param req
+ * @param res
+ */
+exports.addPatient = function (req, res) {
+    const userData = Object.assign({}, req.body, {
+        role: 'user',
+        supervisor: req.user._id
+    });
+
+    const user = new User(userData);
+    user.save(function (error, result) {
+        if (error) {
+            res.status(400).send({message: error});
+        } else {
+            res.json({
+                message: 'Patient was successfully added to database',
+                result: result
+            });
+        }
+    });
 };

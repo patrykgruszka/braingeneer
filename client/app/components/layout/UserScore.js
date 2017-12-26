@@ -15,7 +15,7 @@ class Navigation extends React.Component {
 
     componentDidMount() {
         const component = this;
-        request('/api/my-score', {
+        request('/api/my/score', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

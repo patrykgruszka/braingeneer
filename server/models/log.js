@@ -6,10 +6,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const LogSchema = Schema({
-    _userId: Schema.Types.ObjectId,
+    user: {type: Schema.Types.ObjectId, ref: 'User'},
     event: String,
     status: String,
-    date: { type: Date, default: Date.now},
+    date: {type: Date, default: Date.now},
     details: Schema.Types.Mixed
 });
 

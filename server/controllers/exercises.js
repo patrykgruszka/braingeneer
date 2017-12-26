@@ -77,16 +77,14 @@ exports.complete = function (req, res) {
     const details = req.body.details;
     const score = req.body.score;
 
-    console.log(req.body);
-
     const scoreData = {
-        _exerciseId: exerciseId,
+        exercise: exerciseId,
         details: details,
         score: score
     };
 
     if (user) {
-        scoreData._userId = user._id;
+        scoreData.user = user._id;
     }
 
     Exercise.findOneAndUpdate({ _id: exerciseId }, { $inc: { 'stats.completed': 1 }},  function() {
@@ -101,5 +99,4 @@ exports.complete = function (req, res) {
             }
         });
     });
-
 };

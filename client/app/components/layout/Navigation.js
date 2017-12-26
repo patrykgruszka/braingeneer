@@ -20,7 +20,7 @@ class Navigation extends React.Component {
     componentDidMount() {
         const component = this;
 
-        request('/api/profile', {
+        request('/api/my/profile', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

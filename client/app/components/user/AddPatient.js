@@ -2,37 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Navigation from '../layout/Navigation';
 import PageHeader from '../layout/PageHeader';
+import { browserHistory } from 'react-router';
 import request from '../../services/request';
 import translate from '../../i18n/translate';
 import alertify from 'alertify.js';
 
-class Profile extends React.Component {
+
+class AddPatient extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
+            name: '',
             email: '',
-            name: ''
+            password: '',
+            role: 'user'
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    componentDidMount() {
-        const component = this;
-
-        request('/api/my/profile', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include'
-        }).then(user => {
-            component.setState(user);
-        });
     }
 
     handleInputChange(event) {
@@ -46,8 +35,8 @@ class Profile extends React.Component {
     }
 
     handleSubmit(event) {
-        request('/api/profile', {
-            method: 'PATCH',
+        request('/api/my/patients', {
+            method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -55,30 +44,37 @@ class Profile extends React.Component {
             credentials: 'include',
             body: JSON.stringify(this.state)
         }).then(data => {
+            browserHistory.push('/patients');
             alertify.success(data.message);
         }).catch(data => {
             alertify.error(data.message);
         });
-
         event.preventDefault();
     }
 
     render(){
         return (<div>
             <Navigation/>
-            <PageHeader title={this.props.strings.profile + ' - ' + this.state.email}/>
+            <PageHeader title={this.props.strings.pageTitle}/>
             <form onSubmit={this.handleSubmit} className="container">
                 <div className="row">
-                    <div className="col-xs-12 col-sm-6">
+                    <div className="col-sm-6">
                         <div className="form-group">
-                            <label htmlFor="profile-email-input">{this.props.strings.email}</label>
-                            <input type="email" name="email" className="form-control" id="profile-email-input"
-                                   value={this.state.email} disabled />
+                            <label htmlFor="login-email-input">{this.props.strings.name}</label>
+                            <input type="text" name="name" className="form-control" id="login-name-input"
+                                   value={this.props.name}
+                                   onChange={this.handleInputChange} />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="profile-name-input">{this.props.strings.name}</label>
-                            <input name="name" className="form-control" id="profile-name-input"
-                                   value={this.state.name}
+                            <label htmlFor="login-email-input">{this.props.strings.email}</label>
+                            <input type="email" name="email" className="form-control" id="login-email-input"
+                                   value={this.props.email}
+                                   onChange={this.handleInputChange} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="login-password-input">{this.props.strings.password}</label>
+                            <input type="password" name="password" className="form-control" id="login-password-input"
+                                   value={this.props.password}
                                    onChange={this.handleInputChange} />
                         </div>
                         <div>
@@ -91,17 +87,18 @@ class Profile extends React.Component {
     }
 }
 
-Profile.propTypes = {
+AddPatient.propTypes = {
     strings: PropTypes.object
 };
 
-Profile.defaultProps = {
+AddPatient.defaultProps = {
     strings: {
-        profile: 'Profile',
-        email: 'Address e-mail',
+        pageTitle: 'Add new patient',
         name: 'Name',
+        email: 'Address e-mail',
+        password: 'Password',
         submit: 'Submit'
     }
 };
 
-export default translate('user/Profile')(Profile);
+export default translate('user/AddPatient')(AddPatient);
