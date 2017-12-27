@@ -12,9 +12,15 @@ const Score = mongoose.model('Score');
  * @param res
  */
 exports.list = function (req, res) {
-    const query = Score.find({});
+    const criteria = {};
 
-    query.exec(function (err, docs) {
+    if (req.params.user) {
+        criteria.user = req.params.user;
+    }
+
+    Score.find(criteria)
+        .populate('exercise', 'name type difficulty bounty')
+        .exec(function (err, docs) {
         if (err) {
             res.status(500).send({message: 'There was a problem with getting scores from the database:' + err});
         } else {

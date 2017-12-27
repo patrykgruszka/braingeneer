@@ -37,9 +37,10 @@ class Patients extends React.Component {
         this.state.patients.forEach(function(patient) {
             components.push(
                 <tr key={patient._id}>
+                    <td>{patient.name}</td>
                     <td>{patient.email}</td>
-                    <td>{patient.name || this.props.strings.undefined}</td>
-                    <td>todo</td>
+                    <td>{patient.score} <i className="fa fa-star star-color" aria-hidden="true"></i></td>
+                    <td><Link to={`/users/${patient._id}/scores`}>{this.props.strings.scoresTable}</Link></td>
                 </tr>
             );
         }.bind(this));
@@ -53,8 +54,9 @@ class Patients extends React.Component {
                     <table className="table">
                         <thead>
                             <tr>
-                                <td>{this.props.strings.email}</td>
                                 <td>{this.props.strings.name}</td>
+                                <td>{this.props.strings.email}</td>
+                                <td>{this.props.strings.score}</td>
                                 <td>{this.props.strings.actions}</td>
                             </tr>
                         </thead>
@@ -79,8 +81,9 @@ Patients.defaultProps = {
         noPatientsText: 'Your patients list is empty.',
         name: 'Name',
         email: 'E-mail',
+        score: 'Score',
         actions: 'Actions',
-        undefined: '---',
+        scoresTable: 'Scores table',
         addPatient: 'Add patient'
     }
 };

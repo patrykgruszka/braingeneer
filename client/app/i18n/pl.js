@@ -11,7 +11,8 @@ export default {
         login: 'Zaloguj się',
         register: 'Rejestracja',
         profile: 'Profil',
-        patients: 'Pacjenci'
+        patients: 'Pacjenci',
+        scoresTable: 'Tabela wyników'
     },
     'user/Login': {
         pageTitle: 'Zaloguj się',
@@ -39,8 +40,9 @@ export default {
         noPatientsText: 'Lista twoich pacjentów jest pusta.',
         name: 'Nazwa',
         email: 'E-mail',
+        score: 'Punkty',
+        scoresTable: 'Tabela wyników',
         actions: 'Akcje',
-        undefined: '---',
         addPatient: 'Dodaj pacjenta'
     },
     'user/AddPatient': {
@@ -49,6 +51,15 @@ export default {
         email: 'Adres e-mail',
         password: 'Hasło',
         submit: 'Dodaj'
+    },
+    'user/Scores': {
+        pageTitle: 'Tabela wyników',
+        noScoresText: 'Tabela wyników jest pusta.',
+        exerciseName: 'Nazwa ćwiczenia',
+        type: 'Typ',
+        difficulty: 'Trudność',
+        score: 'Punkty',
+        details: 'Szczegóły'
     },
     'exercise/Exercise': {},
     'exercise/ExerciseList': {},

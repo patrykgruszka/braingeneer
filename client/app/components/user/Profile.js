@@ -46,7 +46,7 @@ class Profile extends React.Component {
     }
 
     handleSubmit(event) {
-        request('/api/profile', {
+        request('/api/my/profile', {
             method: 'PATCH',
             headers: {
                 'Accept': 'application/json',

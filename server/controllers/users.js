@@ -12,46 +12,77 @@ const pauth = passport.authenticate.bind(passport);
 
 /**
  * Get users list
- * @param request
- * @param response
+ * @param req
+ * @param res
  */
-exports.list = function (request, response) {
+exports.list = function (req, res) {
     const query = User.find({}).select('name email role score');
 
-    query.exec(function (error, docs) {
-        if (error) {
-            response.status(500).send({message: 'There was a problem with getting users from the database:' + error});
+    query.exec(function (err, docs) {
+        if (err) {
+            res.status(500).send({message: 'There was a problem with getting users from the database:' + err});
         } else {
-            response.json(docs);
+            res.json(docs);
         }
     });
 };
 
 /**
- * Create user
- * @param request
- * @param response
+ * Get user by identifier
+ * @param req
+ * @param res
  */
-exports.create = function (request, response) {
-    const user = new User(request.body);
+exports.getById = function (req, res) {
+    const user = req.params.user || false;
+
+    if (user !== false) {
+        const query = User.findOne({ _id: user });
+        query.exec(function (err, docs) {
+            if (err) {
+                res.status(500).send({message: 'There was a problem with getting user from the database:' + err});
+            } else {
+                res.json(docs);
+            }
+        })
+    } else {
+        res.status(400).send({message: 'Param user not provided'});
+    }
+};
+
+/**
+ * Create new user
+ * @param req
+ * @param res
+ */
+exports.create = function (req, res) {
+    const user = new User(req.body);
     const allowedRoles = ['user', 'supervisor'];
 
     if (allowedRoles.indexOf(user.role) !== -1) {
         user.save(function (error, result) {
             if (error) {
-                response.status(400).send({message: error});
+                res.status(400).send({message: error});
             } else {
-                response.json({
+                res.json({
                     message: 'User was successfully added to database',
                     result: result
                 });
             }
         });
     } else {
-        response.status(400).send({message: `Role ${user.role} is not allowed`});
+        res.status(400).send({message: `Role ${user.role} is not allowed`});
     }
 };
 
+/**
+ * Handles login error
+ * @param err
+ * @param code
+ * @param message
+ * @param req
+ * @param res
+ * @returns {*}
+ */
 function handleLoginError(err, code, message, req, res) {
     User.findOne({'email': req.body.email}, '_id', function (userErr, user) {
         const logData = {
@@ -70,6 +101,13 @@ function handleLoginError(err, code, message, req, res) {
     return res.status(code).json({message: message});
 }
 
+/**
+ * Handles login success
+ * @param user
+ * @param req
+ * @param res
+ * @returns {*}
+ */
 function handleLoginSuccess(user, req, res) {
     Log.create({
         user: user._id,
@@ -82,6 +120,12 @@ function handleLoginSuccess(user, req, res) {
     });
 }
 
+/**
+ * User login action
+ * @param req
+ * @param res
+ * @param next
+ */
 exports.login = function (req, res, next) {
     pauth('local', function (err, user, info) {
         const error = err || info;
@@ -102,14 +146,14 @@ exports.login = function (req, res, next) {
 };
 
 /**
- * Logout
- * @param request
- * @param response
+ * User logout action
+ * @param req
+ * @param res
  */
-exports.logout = function (request, response) {
-    const userId = request.user._id;
+exports.logout = function (req, res) {
+    const userId = req.user._id;
 
-    request.logout();
+    req.logout();
 
     Log.create({
         user: userId,
@@ -117,13 +161,13 @@ exports.logout = function (request, response) {
         status: 'success'
     });
 
-    response.json({
+    res.json({
         message: 'Logged out'
     })
 };
 
 /**
- * Returns current user if logged
+ * Returns current user info if logged
  * @param request
  * @param response
  */
@@ -133,7 +177,7 @@ exports.profile = function (request, response) {
 };
 
 /**
- * Create user
+ * Updates user profile
  * @param req
  * @param res
  */
@@ -159,6 +203,7 @@ exports.updateProfile = function (req, res) {
 exports.myPatients = function (req, res) {
     User
         .find({supervisor: req.user._id})
+        .select('name email score')
         .exec(function (err, patients) {
             if (err) return res.send(500, {error: err});
             res.json(patients);

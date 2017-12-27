@@ -9,6 +9,7 @@ import Register from './components/user/Register';
 import Profile from './components/user/Profile';
 import Patients from './components/user/Patients';
 import AddPatient from './components/user/AddPatient';
+import UserScores from './components/user/Scores';
 
 render(
     <Router history={browserHistory}>
@@ -19,6 +20,7 @@ render(
         <Route path="/profile" component={Profile}/>
         <Route path="/patients" component={Patients}/>
         <Route path="/patients/add" component={AddPatient}/>
+        <Route path="/users/:user/scores" component={UserScores}/>
         <Route path="/exercise/:exerciseId" component={Exercise}/>
     </Router>,
     document.getElementById('app-container')

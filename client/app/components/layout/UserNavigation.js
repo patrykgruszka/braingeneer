@@ -35,19 +35,22 @@ class UserNavigation extends React.Component {
 
         if (user && user.email) {
             components.push(
-                <LinkContainer key="score" to={{pathname: '/scores'}}>
+                <LinkContainer key="score" to={{pathname: `/users/${user._id}/scores`}}>
                     <NavItem eventKey={1} href="#"><UserScore score={user.score} /></NavItem>
                 </LinkContainer>,
                 <NavDropdown key="user-dropdown" eventKey={2} title={`${this.props.strings.hello}, ${user.email}`} id="user-nav-dropdown">
                     <LinkContainer to={{pathname: '/profile'}}>
                         <MenuItem eventKey={2.1} href="#">{this.props.strings.profile}</MenuItem>
                     </LinkContainer>
+                    <LinkContainer to={{pathname: `/users/${user._id}/scores`}}>
+                        <MenuItem eventKey={2.2} href="#">{this.props.strings.scoresTable}</MenuItem>
+                    </LinkContainer>
                     {(user.role === 'supervisor' || user.role === 'admin') &&
                     <LinkContainer to={{pathname: '/patients'}}>
-                        <MenuItem eventKey={2.2} href="#">{this.props.strings.patients}</MenuItem>
+                        <MenuItem eventKey={2.3} href="#">{this.props.strings.patients}</MenuItem>
                     </LinkContainer>}
                     <LinkContainer to={{pathname: '/logout'}}>
-                        <MenuItem eventKey={2.3} href="#">{this.props.strings.logout}</MenuItem>
+                        <MenuItem eventKey={2.4} href="#">{this.props.strings.logout}</MenuItem>
                     </LinkContainer>
                 </NavDropdown>
             )
@@ -81,7 +84,8 @@ UserNavigation.defaultProps = {
         login: 'Login',
         register: 'Register',
         profile: 'Profile',
-        patients: 'Patients'
+        patients: 'Patients',
+        scoresTable: 'Scores table',
     }
 };
 
