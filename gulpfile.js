@@ -35,10 +35,15 @@ gulp.task('watch', function () {
     gulp.watch('./client/stylesheets/**/*.scss', ['styles']);
 });
 
+gulp.task('copy', function() {
+    gulp.src('./client/images/**/*').pipe(gulp.dest('./client/public/dist/images'));
+    gulp.src('./client/fonts/**/*').pipe(gulp.dest('./client/public/dist/fonts'));
+});
+
 // When running 'gulp' on the terminal this task will fire.
 // It will start watching for changes in every .js file.
 // If there's a change, the task 'scripts' defined above will fire.
-gulp.task('default', ['scripts', 'styles', 'watch']);
+gulp.task('default', ['scripts', 'styles', 'copy', 'watch']);
 
 // Private Functions
 // ----------------------------------------------------------------------------

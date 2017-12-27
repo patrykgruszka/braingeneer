@@ -11,6 +11,7 @@ const ExerciseSchema = Schema({
     description: String,
     type: String,
     lang: String,
+    image: String,
     difficulty: {type: Number, min: 1, max: 3},
     bounty: {type: Number, min: 0},
     data: Schema.Types.Mixed,

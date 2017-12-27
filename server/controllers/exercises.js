@@ -15,7 +15,7 @@ const Score = mongoose.model('Score');
  * @param response
  */
 exports.list = function (request, response) {
-    const query = Exercise.find({}).select('name type description difficulty bounty stats');
+    const query = Exercise.find({}).select('name type description difficulty bounty stats image');
 
     query.exec(function (error, docs) {
         if (error) {

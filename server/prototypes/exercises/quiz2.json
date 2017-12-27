@@ -1,0 +1,181 @@
+{
+  "name": "Dokończ przysłowia",
+  "type": "quiz",
+  "lang": "pl",
+  "image": "/dist/images/exercises/quiz-2.jpg",
+  "difficulty": 1,
+  "bounty": 15,
+  "data": {
+    "questions": [
+      {
+        "question": "Dokończ przysłowie: \"Lepiej późno...\"",
+        "options": [{
+          "name": "niż w ogóle"
+        },{
+          "name": "niż za późno"
+        },{
+          "name": "niż wcale"
+        }, {
+          "name": "niż nigdy"
+        }],
+        "answer": 2
+      },
+      {
+        "question": "Dokończ przysłowie: \"Gdyby kózka nie skakała...\"",
+        "options": [{
+          "name": "to by nóżki nie złamała"
+        },{
+          "name": "to by w karty nie przegrała"
+        },{
+          "name": "to by więcej siły miała"
+        }, {
+          "name": "to by zęby miała"
+        }],
+        "answer": 0
+      },
+      {
+        "question": "Dokończ przysłowie: \"Komu w drogę...\"",
+        "options": [{
+          "name": "temu kompas"
+        },{
+          "name": "temu trampek na nogę"
+        },{
+          "name": "temu czas"
+        }, {
+          "name": "temu mapa"
+        }],
+        "answer": 2
+      },
+      {
+        "question": "Dokończ przysłowie: \"Trafiła kosa...\"",
+        "options": [{
+          "name": "do kłosa"
+        },{
+          "name": "na pole"
+        },{
+          "name": "w ziemię"
+        }, {
+          "name": "na kamień"
+        }],
+        "answer": 3
+      },
+      {
+        "question": "Dokończ przysłowie: \"Gdzie kucharek sześć...\"",
+        "options": [{
+          "name": "tam nóg dwanaście"
+        },{
+          "name": "tam nie ma co jeść"
+        },{
+          "name": "tam zawsze można zjeść"
+        }, {
+          "name": "tam rąk dwanaście"
+        }],
+        "answer": 1
+      },
+      {
+        "question": "Dokończ przysłowie: \"Nie ma róży...\"",
+        "options": [{
+          "name": "bez ognia"
+        },{
+          "name": "bez wody"
+        },{
+          "name": "bez kolców"
+        }, {
+          "name": "bez wina"
+        }],
+        "answer": 2
+      },
+      {
+        "question": "Dokończ przysłowie: \"Tonący...\"",
+        "options": [{
+          "name": "brzytwy się chwyta"
+        },{
+          "name": "wody się nałyka"
+        },{
+          "name": "koła się trzyma"
+        }, {
+          "name": "ręki się chwyta"
+        }],
+        "answer": 0
+      },
+      {
+        "question": "Dokończ przysłowie: \"Kuj żelazo póki...\"",
+        "options": [{
+          "name": "czerwone"
+        },{
+          "name": "ciepłe"
+        },{
+          "name": "świeże"
+        }, {
+          "name": "gorące"
+        }],
+        "answer": 3
+      },
+      {
+        "question": "Dokończ przysłowie: \"Kto rano wstaje...\"",
+        "options": [{
+          "name": "ten źle sypia"
+        },{
+          "name": "temu Pan Bóg daje"
+        },{
+          "name": "ten jeść dostaje"
+        }, {
+          "name": "ten się wcześniej naje"
+        }],
+        "answer": 1
+      },
+      {
+        "question": "Dokończ przysłowie: \"Nie chwal dnia przed...\"",
+        "options": [{
+          "name": "niedzielą"
+        },{
+          "name": "wieczorem"
+        },{
+          "name": "południem"
+        }, {
+          "name": "zachodem słońca"
+        }],
+        "answer": 3
+      },
+      {
+        "question": "Dokończ przysłowie: \"Uderz w stół...\"",
+        "options": [{
+          "name": "a ręka Cię zaboli"
+        },{
+          "name": "a mleko się wyleje"
+        },{
+          "name": "a pies się wystraszy"
+        }, {
+          "name": "a nożyce się odezwą"
+        }],
+        "answer": 3
+      },
+      {
+        "question": "Dokończ przysłowie: \"Jeśli wchodzisz między wrony...\"",
+        "options": [{
+          "name": "musisz krakać jak i one"
+        },{
+          "name": "będziesz jeść to, co one"
+        },{
+          "name": "musisz kłamać jak i one"
+        }, {
+          "name": "musisz śpiewać tak, jak one"
+        }],
+        "answer": 0
+      },
+      {
+        "question": "Dokończ przysłowie: \"Myślał kogut o niedzieli...\"",
+        "options": [{
+          "name": "a we wtorek kury wzięli"
+        },{
+          "name": "lecz go diabli wzięli"
+        },{
+          "name": "a w sobotę łeb mu ścieli"
+        }, {
+          "name": "lecz w sobotę zboże ścieli"
+        }],
+        "answer": 2
+      }
+    ]
+  }
+}

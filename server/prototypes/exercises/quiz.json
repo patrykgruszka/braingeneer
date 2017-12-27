@@ -2,6 +2,7 @@
   "name": "Quiz z wiedzy ogólnej",
   "type": "quiz",
   "lang": "pl",
+  "image": "/dist/images/exercises/quiz-1.jpg",
   "difficulty": 1,
   "bounty": 10,
   "data": {
@@ -15,7 +16,7 @@
         },{
           "name": "Sukienka"
         }, {
-          "name": "Garnitur"
+          "name": "Koszula i spodnie"
         }],
         "answer": 1
       },

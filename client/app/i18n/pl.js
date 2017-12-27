@@ -1,6 +1,6 @@
 export default {
     'page/Index': {
-        pageTitle: 'Dzień dobry'
+        pageTitle: 'Wybierz ćwiczenie'
     },
     'layout/Navigation': {
         exercises: 'Ćwiczenia'

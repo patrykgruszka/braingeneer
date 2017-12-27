@@ -13,7 +13,7 @@ class ExerciseCard extends React.Component {
         return (
             <Link className="exercise-card" to={`/exercise/${exercise._id}`}>
                 <div className="exercise-card-header">
-                    <img src="http://via.placeholder.com/262x100" alt={exercise.name} className="exercise-card-img" />
+                    <img src={exercise.image || 'http://via.placeholder.com/262x100'} alt={exercise.name} className="exercise-card-img" />
                 </div>
                 <div className="exercise-card-content">
                     <h3 className="exercise-card-title">{exercise.name}</h3>

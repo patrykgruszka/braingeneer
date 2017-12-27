@@ -33,14 +33,16 @@ class ExerciseList extends React.Component {
         const components = [];
 
         this.state.exercises.forEach(function(exercise) {
-            components.push(<ExerciseCard key={exercise._id} exercise={exercise}/>);
+            components.push(
+                <div key={exercise._id} className="col-xs-12 col-sm-6 col-md-3">
+                    <ExerciseCard exercise={exercise}/>
+                </div>
+            );
         }.bind(this));
 
         return (<div className="container">
             <div className="row">
-                <div className="col-xs-12 col-sm-6 col-md-3">
-                    {components}
-                </div>
+                {components}
             </div>
         </div>);
     }

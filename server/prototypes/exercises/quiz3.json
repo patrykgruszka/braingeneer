@@ -1,0 +1,168 @@
+{
+  "name": "Działania matematyczne",
+  "type": "quiz",
+  "lang": "pl",
+  "image": "/dist/images/exercises/quiz-3.jpg",
+  "difficulty": 2,
+  "bounty": 25,
+  "data": {
+    "questions": [
+      {
+        "question": "11 - 3 =",
+        "options": [{
+          "name": "14"
+        },{
+          "name": "5"
+        },{
+          "name": "9"
+        }, {
+          "name": "8"
+        }],
+        "answer": 3
+      },
+      {
+        "question": "4 + 8 =",
+        "options": [{
+          "name": "12"
+        },{
+          "name": "10"
+        },{
+          "name": "4"
+        }, {
+          "name": "13"
+        }],
+        "answer": 0
+      },
+      {
+        "question": "8 - 6 =",
+        "options": [{
+          "name": "4"
+        },{
+          "name": "5"
+        },{
+          "name": "2"
+        }, {
+          "name": "1"
+        }],
+        "answer": 2
+      },
+      {
+        "question": "2 x 3 =",
+        "options": [{
+          "name": "5"
+        },{
+          "name": "6"
+        },{
+          "name": "9"
+        }, {
+          "name": "8"
+        }],
+        "answer": 1
+      },
+      {
+        "question": "10 : 2 =",
+        "options": [{
+          "name": "5"
+        },{
+          "name": "4"
+        },{
+          "name": "0"
+        }, {
+          "name": "12"
+        }],
+        "answer": 0
+      },
+      {
+        "question": "5 x 1 =",
+        "options": [{
+          "name": "0"
+        },{
+          "name": "1"
+        },{
+          "name": "10"
+        }, {
+          "name": "5"
+        }],
+        "answer": 3
+      },
+      {
+        "question": "25 - 21 =",
+        "options": [{
+          "name": "4"
+        },{
+          "name": "1"
+        },{
+          "name": "15"
+        }, {
+          "name": "5"
+        }],
+        "answer": 0
+      },
+      {
+        "question": "2 + 3 + 1 =",
+        "options": [{
+          "name": "5"
+        },{
+          "name": "6"
+        },{
+          "name": "10"
+        }, {
+          "name": "9"
+        }],
+        "answer": 1
+      },
+      {
+        "question": "5 + 4 + 2 =",
+        "options": [{
+          "name": "9"
+        },{
+          "name": "12"
+        },{
+          "name": "10"
+        }, {
+          "name": "11"
+        }],
+        "answer": 3
+      },
+      {
+        "question": "20 - 16 =",
+        "options": [{
+          "name": "6"
+        },{
+          "name": "10"
+        },{
+          "name": "4"
+        }, {
+          "name": "1"
+        }],
+        "answer": 2
+      },
+      {
+        "question": "37 + 28 =",
+        "options": [{
+          "name": "23"
+        },{
+          "name": "55"
+        },{
+          "name": "62"
+        }, {
+          "name": "65"
+        }],
+        "answer": 3
+      },
+      {
+        "question": "2 x 5 =",
+        "options": [{
+          "name": "10"
+        },{
+          "name": "15"
+        },{
+          "name": "5"
+        }, {
+          "name": "25"
+        }],
+        "answer": 0
+      }
+    ]
+  }
+}

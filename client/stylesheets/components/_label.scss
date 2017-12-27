@@ -10,6 +10,9 @@
   &--1 {
     @extend .label-success;
   }
+  &--2 {
+    @extend .label-warning;
+  }
 }
 
 .exercise-bounty-label {
