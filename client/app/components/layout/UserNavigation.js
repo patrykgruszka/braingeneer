@@ -45,12 +45,15 @@ class UserNavigation extends React.Component {
                     <LinkContainer to={{pathname: `/users/${user._id}/scores`}}>
                         <MenuItem eventKey={2.2} href="#">{this.props.strings.scoresTable}</MenuItem>
                     </LinkContainer>
+                    <LinkContainer to={{pathname: `/users/${user._id}/logs`}}>
+                        <MenuItem eventKey={2.3} href="#">{this.props.strings.logsTable}</MenuItem>
+                    </LinkContainer>
                     {(user.role === 'supervisor' || user.role === 'admin') &&
                     <LinkContainer to={{pathname: '/patients'}}>
-                        <MenuItem eventKey={2.3} href="#">{this.props.strings.patients}</MenuItem>
+                        <MenuItem eventKey={2.4} href="#">{this.props.strings.patients}</MenuItem>
                     </LinkContainer>}
                     <LinkContainer to={{pathname: '/logout'}}>
-                        <MenuItem eventKey={2.4} href="#">{this.props.strings.logout}</MenuItem>
+                        <MenuItem eventKey={2.5} href="#">{this.props.strings.logout}</MenuItem>
                     </LinkContainer>
                 </NavDropdown>
             )
@@ -86,6 +89,7 @@ UserNavigation.defaultProps = {
         profile: 'Profile',
         patients: 'Patients',
         scoresTable: 'Scores table',
+        logsTable: 'Logs table',
     }
 };
 

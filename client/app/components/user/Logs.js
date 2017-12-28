@@ -1,31 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router';
 import dateFormat from 'dateformat';
 import Navigation from '../layout/Navigation';
 import PageHeader from '../layout/PageHeader';
 import request from '../../services/request';
 import translate from '../../i18n/translate';
 
-class Scores extends React.Component {
+class Logs extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             user: {},
-            scores: []
+            logs: []
         };
     }
 
     componentDidMount() {
         this.fetchUser(this.props.params.user);
-        this.fetchScores(this.props.params.user);
+        this.fetchLogs(this.props.params.user);
     }
 
     componentWillReceiveProps(newProps) {
         this.fetchUser(newProps.params.user);
-        this.fetchScores(newProps.params.user);
+        this.fetchLogs(newProps.params.user);
     }
 
     fetchUser(userId) {
@@ -43,39 +42,33 @@ class Scores extends React.Component {
         });
     }
 
-    fetchScores(userId) {
+    fetchLogs(userId) {
         const component = this;
 
-        request('/api/users/' + userId + '/scores', {
+        request('/api/users/' + userId + '/logs', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             credentials: 'include'
-        }).then(scores => {
-            component.setState({...component.state, scores: scores.reverse()});
+        }).then(logs => {
+            component.setState({...component.state, logs: logs.reverse()});
         });
     }
 
     render(){
+        const self = this;
         const components = [];
 
-        this.state.scores.forEach(function(record, key) {
+        this.state.logs.forEach(function(record, key) {
             components.push(
                 <tr key={record._id}>
                     <td>{key + 1}</td>
-                    <td><Link to={`/exercise/${record.exercise._id}`}>{record.exercise.name}</Link></td>
-                    <td>{record.exercise.type}</td>
-                    <td>{record.exercise.difficulty}</td>
-                    <td>{record.score} <i className="fa fa-star star-color" aria-hidden="true"></i></td>
-                    <td>
-                        {record.exercise.type === 'quiz' &&
-                            `${this.props.strings.correctAnswers}: ${record.details.correctAnswers}, ` +
-                            `${this.props.strings.wrongAnswers}: ${record.details.wrongAnswers}`
-                        }
-                    </td>
-                    <td>{dateFormat(record.exercise.date, 'yyyy-mm-dd HH:MM:ss')}</td>
+                    <td>{self.props.strings[record.event]}</td>
+                    <td><span className={`label label-${record.status}`}>{self.props.strings[record.status]}</span></td>
+                    <td>{dateFormat(record.date, 'yyyy-mm-dd HH:MM:ss')}</td>
+                    <td>{record.details && record.details.message}</td>
                 </tr>
             );
         }.bind(this));
@@ -85,17 +78,15 @@ class Scores extends React.Component {
             <PageHeader title={`${this.props.strings.pageTitle}: ${this.state.user.name}`}/>
             <div className="container">
                 {components.length === 0 ?
-                    <div className="alert alert-info">{this.props.strings.noScoresText}</div> :
+                    <div className="alert alert-info">{this.props.strings.noLogsText}</div> :
                     <table className="table">
                         <thead>
                             <tr>
-                                <td>{this.props.strings['no.']}</td>
-                                <td>{this.props.strings.exerciseName}</td>
-                                <td>{this.props.strings.type}</td>
-                                <td>{this.props.strings.difficulty}</td>
-                                <td>{this.props.strings.score}</td>
-                                <td>{this.props.strings.details}</td>
+                                <td>{this.props.strings['No.']}</td>
+                                <td>{this.props.strings.event}</td>
+                                <td>{this.props.strings.status}</td>
                                 <td>{this.props.strings.date}</td>
+                                <td>{this.props.strings.details}</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -108,24 +99,25 @@ class Scores extends React.Component {
     }
 }
 
-Scores.propTypes = {
+Logs.propTypes = {
     strings: PropTypes.object
 };
 
-Scores.defaultProps = {
+Logs.defaultProps = {
     strings: {
-        pageTitle: 'Scores table',
-        noScoresText: 'Your score list is empty.',
-        exerciseName: 'Exercise name',
+        pageTitle: 'Activity table',
+        noLogsText: 'Your log list is empty.',
+        event: 'Event',
+        status: 'Status',
         date: 'Date',
         type: 'Type',
-        difficulty: 'Difficulty',
-        score: 'Scores',
-        details: 'Details',
-        correctAnswers: 'Correct answers',
-        wrongAnswers: 'Wrong answers',
-        'No.': 'No.'
+        'No.': 'No.',
+        login: 'Login',
+        logout: 'Logout',
+        success: 'Success',
+        error: 'Error',
+        details: 'Details'
     }
 };
 
-export default translate('user/Scores')(Scores);
+export default translate('user/Logs')(Logs);

@@ -43,6 +43,7 @@ module.exports = function(app, passport, express) {
     app.post('/api/users', users.create);
     app.get('/api/users/:user', auth.requiresLogin, auth.hasAccessToUser, users.getById);
     app.get('/api/users/:user/scores', auth.requiresLogin, auth.hasAccessToUser, scores.list);
+    app.get('/api/users/:user/logs', auth.requiresLogin, auth.hasAccessToUser, logs.list);
 
     // scores api
     app.get('/api/scores', auth.requiresLogin, auth.hasAdminRole, scores.list);

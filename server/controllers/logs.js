@@ -8,17 +8,21 @@ const Log = mongoose.model('Log');
 
 /**
  * Get logs list
- * @param request
- * @param response
+ * @param req
+ * @param res
  */
-exports.list = function (request, response) {
-    const query = Log.find({});
+exports.list = function (req, res) {
+    const criteria = {};
 
-    query.exec(function (error, docs) {
-        if (error) {
-            response.status(500).send({message: 'There was a problem with getting logs from the database:' + error});
+    if (req.params.user) {
+        criteria.user = req.params.user;
+    }
+
+    Log.find(criteria).exec(function (err, docs) {
+        if (err) {
+            res.status(500).send({message: 'There was a problem with getting logs from the database:' + err});
         } else {
-            response.json(docs);
+            res.json(docs);
         }
     });
 };

@@ -7,6 +7,6 @@
  */
 exports.index = function(request, response) {
     response.render('index', {
-        title: 'Braingeneer index'
+        title: 'Braingeneer - rehabilitation after stroke'
     });
 };

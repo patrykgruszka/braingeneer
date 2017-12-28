@@ -40,7 +40,7 @@ class Patients extends React.Component {
                     <td>{patient.name}</td>
                     <td>{patient.email}</td>
                     <td>{patient.score} <i className="fa fa-star star-color" aria-hidden="true"></i></td>
-                    <td><Link to={`/users/${patient._id}/scores`}>{this.props.strings.scoresTable}</Link></td>
+                    <td><Link to={`/users/${patient._id}/scores`}>{this.props.strings.scoresTable}</Link> <Link to={`/users/${patient._id}/logs`}>{this.props.strings.logsTable}</Link></td>
                 </tr>
             );
         }.bind(this));
@@ -84,7 +84,8 @@ Patients.defaultProps = {
         score: 'Score',
         actions: 'Actions',
         scoresTable: 'Scores table',
-        addPatient: 'Add patient'
+        addPatient: 'Add patient',
+        logsTable: 'Logs table'
     }
 };
 

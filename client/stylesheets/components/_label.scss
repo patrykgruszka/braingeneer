@@ -23,3 +23,7 @@
     color: $brand-warning;
   }
 }
+
+.label-error {
+  @extend .label-danger;
+}

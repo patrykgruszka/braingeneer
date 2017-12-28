@@ -12,7 +12,8 @@ export default {
         register: 'Rejestracja',
         profile: 'Profil',
         patients: 'Pacjenci',
-        scoresTable: 'Tabela wyników'
+        scoresTable: 'Tabela wyników',
+        logsTable: 'Dziennik aktywności'
     },
     'user/Login': {
         pageTitle: 'Zaloguj się',
@@ -43,7 +44,8 @@ export default {
         score: 'Punkty',
         scoresTable: 'Tabela wyników',
         actions: 'Akcje',
-        addPatient: 'Dodaj pacjenta'
+        addPatient: 'Dodaj pacjenta',
+        logsTable: 'Dziennik aktywności'
     },
     'user/AddPatient': {
         pageTitle: 'Dodaj nowego pacjenta',
@@ -56,9 +58,27 @@ export default {
         pageTitle: 'Tabela wyników',
         noScoresText: 'Tabela wyników jest pusta.',
         exerciseName: 'Nazwa ćwiczenia',
+        date: 'Data',
         type: 'Typ',
         difficulty: 'Trudność',
         score: 'Punkty',
+        details: 'Szczegóły',
+        correctAnswers: 'Poprawne',
+        wrongAnswers: 'Błędne',
+        'No.': 'L.p.'
+    },
+    'user/Logs': {
+        pageTitle: 'Dziennik aktywności',
+        noLogsText: 'Ten dziennik aktywności jest pusty.',
+        event: 'Zdarzenie',
+        status: 'Status',
+        date: 'Data',
+        type: 'Typ',
+        'No.': 'L.p.',
+        login: 'Logowanie',
+        logout: 'Wylogowanie',
+        success: 'Sukces',
+        error: 'Błąd',
         details: 'Szczegóły'
     },
     'exercise/Exercise': {},
