@@ -91,7 +91,7 @@ exports.complete = function (req, res) {
 
     async.parallel([
         function(cb) {
-            User.findOneAndUpdate({ _id: user._id }, { $inc: { 'score': score }}, cb);
+            User.findOneAndUpdate({ _id: user._id }, { $inc: { 'score': score }, }, {fields: 'name email role score'}, cb);
         },
         function(cb) {
             Exercise.findOneAndUpdate({ _id: exerciseId }, { $inc: { 'stats.completed': 1 }}, cb);
@@ -99,10 +99,13 @@ exports.complete = function (req, res) {
         function(cb) {
             Score.create(scoreData, cb);
         }
-    ], function(err) {
+    ], function(err, results) {
         if (err) res.status(500).send({message: err});
         res.send({
-            message: 'Congratulations!'
+            message: 'Congratulations!',
+            user: results[0],
+            exercise: results[1],
+            score: results[2]
         });
     });
 };

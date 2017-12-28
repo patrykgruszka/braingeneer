@@ -1,19 +1,42 @@
 .exercise-quiz {
-  max-width: 600px;
-  padding: 30px 0;
+  max-width: 640px;
+  padding: 20px 0;
 
   .question-number {
-    @extend .label;
-    @extend .label-default;
-    font-size: 16px;
+    font-size: 18px;
+    color: $text-muted;
+    letter-spacing: 0.02em;
+
+    > b {
+      &:nth-child(2) {
+        font-size: 28px;
+        font-weight: 700;
+      }
+      &:nth-child(3) {
+        font-size: 28px;
+        font-weight: 400;
+      }
+      &:nth-child(4) {
+        color: lighten($text-muted, 15%);
+      }
+    }
   }
 
   .question-title {
     margin-bottom: 20px;
-    margin-top: 10px;
+    font-weight: 700;
+    font-size: 28px;
   }
 
   ol.question-options {
     padding: 0;
+  }
+
+  .quiz-results {
+    .score {
+      font-size: 42px;
+      color: $brand-warning;
+      margin-bottom: 20px;
+    }
   }
 }

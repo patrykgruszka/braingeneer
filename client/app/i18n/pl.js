@@ -105,5 +105,13 @@ export default {
     'exercise/quiz/Question': {
         successMessage: 'Gratulacje, dobra odpowiedź!',
         errorMessage: 'To nie jest poprawna odpowiedź. Spróbuj jeszcze raz.'
+    },
+    'exercise/quiz/Results': {
+        congratulations: 'Gratulacje',
+        messageForUser: 'Ukończyłeś to ćwiczenie. Punkty zostaną dodane do Twojego konta',
+        messageForAnonymous: 'Ukończyłeś to ćwiczenie. Utwórz konto i zaloguj się, jeśli chcesz aby punkty uzyskiwane w ćwiczeniach były zapisywane.',
+        exercises: 'Wróć do ćwiczeń',
+        register: 'Zarejestruj się',
+        login: 'Zaloguj się'
     }
 };

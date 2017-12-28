@@ -36,7 +36,7 @@ exports.getById = function (req, res) {
     const user = req.params.user || false;
 
     if (user !== false) {
-        const query = User.findOne({ _id: user });
+        const query = User.findOne({ _id: user }).select('name email role score');
         query.exec(function (err, docs) {
             if (err) {
                 res.status(500).send(err);

@@ -46,7 +46,7 @@ class Exercise extends React.Component {
         return (<div>
             <Navigation/>
             <ExerciseHeader exercise={this.state.exercise} />
-            {this.exerciseFactory()}
+            <div className="exercise-container">{this.exerciseFactory()}</div>
         </div>);
     }
 }

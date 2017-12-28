@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import translate from '../../../i18n/translate.js';
 import Question from './Question';
+import Results from './Results';
 import request from "../../../services/request";
 import alertify from "alertify.js";
 import {browserHistory} from "react-router";
@@ -14,10 +15,9 @@ class Quiz extends React.Component {
             currentQuestion: 1,
             selectedAnswer: -1,
             correctAnswers: 0,
-            wrongAnswers: 0
+            wrongAnswers: 0,
+            completed: false
         };
-
-        console.log(this.props.exercise);
     }
 
     componentDidMount() {
@@ -54,7 +54,9 @@ class Quiz extends React.Component {
     }
 
     complete() {
-        request('/api/exercises/' + this.props.exercise._id + '/complete', {
+        const component = this;
+
+        request('/api/exercises/' + component.props.exercise._id + '/complete', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -69,8 +71,10 @@ class Quiz extends React.Component {
                 }
             })
         }).then(data => {
-            browserHistory.push('/');
-            alertify.success(data.message);
+            component.setState(...component.state, {
+                completed: true,
+                results: data
+            });
         }).catch(data => {
             alertify.error(data.message);
         });
@@ -84,7 +88,7 @@ class Quiz extends React.Component {
         return this.state.correctAnswers >= this.state.currentQuestion;
     }
 
-    render(){
+    render() {
         const question = this.props.exercise.data.questions[this.state.currentQuestion - 1];
 
         const button = this.isLastQuestion() ?
@@ -96,23 +100,29 @@ class Quiz extends React.Component {
 
 
         return (
-            <div className="exercise-container">
-                <div className="exercise exercise-quiz">
-                    <p className="question-number">{this.props.strings.question}: {this.state.currentQuestion}/{this.props.exercise.data.questions.length}</p>
-                    <Question
-                        question={question}
-                        selectedAnswer={this.state.selectedAnswer}
-                        isResolved={this.isCurrentQuestionAnswered.bind(this)}
-                        handleCorrectAnswer={this.correctAnswerHandler.bind(this)}
-                        handleWrongAnswer={this.wrongAnswerHandler.bind(this)}
-                    />
-                    {!this.isLastQuestion() && this.isCurrentQuestionAnswered() &&
-                        <button className="btn btn-success" onClick={this.nextQuestion.bind(this)}>{this.props.strings.nextQuestion}</button>
-                    }
-                    {this.isLastQuestion() && this.isCurrentQuestionAnswered() &&
-                        <button className="btn btn-success" onClick={this.complete.bind(this)}>{this.props.strings.finish}</button>
-                    }
-                </div>
+            <div className="exercise exercise-quiz">
+                {this.state.completed ? <Results results={this.state.results}/> :
+                    <div>
+                        <p className="question-number">
+                            <b>{this.props.strings.question}:</b><b>{this.state.currentQuestion}</b><b>/</b><b>{this.props.exercise.data.questions.length}</b>
+                        </p>
+                        <Question
+                            question={question}
+                            selectedAnswer={this.state.selectedAnswer}
+                            isResolved={this.isCurrentQuestionAnswered.bind(this)}
+                            handleCorrectAnswer={this.correctAnswerHandler.bind(this)}
+                            handleWrongAnswer={this.wrongAnswerHandler.bind(this)}
+                        />
+                        {!this.isLastQuestion() && this.isCurrentQuestionAnswered() &&
+                        <button className="btn btn-success"
+                                onClick={this.nextQuestion.bind(this)}>{this.props.strings.nextQuestion}</button>
+                        }
+                        {this.isLastQuestion() && this.isCurrentQuestionAnswered() &&
+                        <button className="btn btn-success"
+                                onClick={this.complete.bind(this)}>{this.props.strings.finish}</button>
+                        }
+                    </div>
+                }
             </div>
         );
     }
