@@ -20,7 +20,7 @@ exports.list = function (req, res) {
 
     Log.find(criteria).exec(function (err, docs) {
         if (err) {
-            res.status(500).send({message: 'There was a problem with getting logs from the database:' + err});
+            res.status(500).send(err);
         } else {
             res.json(docs);
         }

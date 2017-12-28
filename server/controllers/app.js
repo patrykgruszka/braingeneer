@@ -1,4 +1,5 @@
 'use strict';
+const __ = require('../i18n/translate');
 
 /**
  * Application index route
@@ -7,6 +8,6 @@
  */
 exports.index = function(request, response) {
     response.render('index', {
-        title: 'Braingeneer - rehabilitation after stroke'
+        title: __('Braingeneer - rehabilitation after stroke')
     });
 };

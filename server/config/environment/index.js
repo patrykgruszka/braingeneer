@@ -9,7 +9,9 @@ const config = {
     // Secret for session, you will want to change this and make it an environment variable
     secrets: {
         session: 'braingeneer-secret'
-    }
+    },
+
+    lang: 'pl'
 };
 
 module.exports = Object.assign({}, config, require(`./${config.env}.js`) || {});

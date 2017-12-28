@@ -17,9 +17,9 @@ const Score = mongoose.model('Score');
 exports.list = function (request, response) {
     const query = Exercise.find({}).select('name type description difficulty bounty stats image');
 
-    query.exec(function (error, docs) {
-        if (error) {
-            response.status(500).send({message: 'There was a problem with getting exercises from the database:' + error});
+    query.exec(function (err, docs) {
+        if (err) {
+            response.status(500).send(err);
         } else {
             response.json(docs);
         }
@@ -33,7 +33,7 @@ exports.getById = function (req, res) {
         const query = Exercise.findOne({ _id: exerciseId });
         query.exec(function (err, docs) {
             if (err) {
-                res.status(500).send({message: 'There was a problem with getting exercise from the database:' + err});
+                res.status(500).send(err);
             } else {
                 res.json(docs);
             }
@@ -56,7 +56,7 @@ exports.start = function (req, res) {
 
         query.exec(function (err, docs) {
             if (err) {
-                res.status(500).send({message: 'There was a problem with updating exercise:' + err});
+                res.status(500).send(err);
             } else {
                 res.json(docs);
             }
@@ -102,7 +102,6 @@ exports.complete = function (req, res) {
     ], function(err, results) {
         if (err) res.status(500).send({message: err});
         res.send({
-            message: 'Congratulations!',
             user: results[0],
             exercise: results[1],
             score: results[2]

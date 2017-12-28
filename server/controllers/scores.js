@@ -22,7 +22,7 @@ exports.list = function (req, res) {
         .populate('exercise', 'name type difficulty bounty')
         .exec(function (err, docs) {
         if (err) {
-            res.status(500).send({message: 'There was a problem with getting scores from the database:' + err});
+            res.status(500).send(err);
         } else {
             res.json(docs);
         }

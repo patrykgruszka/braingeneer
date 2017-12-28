@@ -6,6 +6,7 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 const Schema = mongoose.Schema;
+const __ = require('../i18n/translate');
 
 /**
  * User Schema
@@ -43,12 +44,12 @@ UserSchema
  */
 UserSchema.path('email').validate(function (email) {
     return email.length;
-}, 'Email cannot be blank');
+}, __('Email cannot be blank'));
 
 UserSchema.path('email').validate(function (email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email.toLowerCase());
-}, 'Email address must be valid ');
+}, __('Email address must be valid'));
 
 UserSchema.path('email').validate(function (email, fn) {
     const User = mongoose.model('User');
@@ -59,11 +60,11 @@ UserSchema.path('email').validate(function (email, fn) {
             fn(!err && users.length === 0);
         });
     } else fn(true);
-}, 'Email already exists');
+}, __('Email already exists'));
 
 UserSchema.path('hashed_password').validate(function (hashed_password) {
     return hashed_password.length && this._password.length;
-}, 'Password cannot be blank');
+}, __('Password cannot be blank'));
 
 
 const validatePresenceOf = value => value && value.length;

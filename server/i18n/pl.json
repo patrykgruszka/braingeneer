@@ -1,0 +1,16 @@
+{
+  "Braingeneer - rehabilitation after stroke": "Rehabilitacja po udarach mózgu",
+
+  "Email cannot be blank": "Adres e-mail nie może być pusty",
+  "Email address must be valid": "Podaj poprawny adres e-mail",
+  "Email already exists": "Podany adres e-mail już istnieje",
+  "Password cannot be blank": "Hasło nie może być puste",
+
+  "Authorization successful": "Zostałeś zalogowany",
+  "Invalid email address or password": "Nieprawidłowy adres e-mail lub hasło",
+  "User not found": "Nie znaleziono użytkownika",
+  "Something went wrong, please try again": "Coś poszło nie tak, spróbuj ponownie",
+  "Logged out": "Zostałeś wylogowany",
+  "User profile was successfully updated": "Profil użytkownika został zaktualizowany",
+  "Patient was successfully added to database": "Pacjent został dodany pomyślnie"
+}

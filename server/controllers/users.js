@@ -9,6 +9,7 @@ const User = mongoose.model('User');
 const Score = mongoose.model('Score');
 const Log = mongoose.model('Log');
 const pauth = passport.authenticate.bind(passport);
+const __ = require('../i18n/translate');
 
 /**
  * Get users list
@@ -20,7 +21,7 @@ exports.list = function (req, res) {
 
     query.exec(function (err, docs) {
         if (err) {
-            res.status(500).send({message: 'There was a problem with getting users from the database:' + err});
+            res.status(500).send(err);
         } else {
             res.json(docs);
         }
@@ -115,7 +116,7 @@ function handleLoginSuccess(user, req, res) {
     });
 
     return res.json({
-        message: 'Authorization successful'
+        message: __('Authorization successful')
     });
 }
 
@@ -129,15 +130,15 @@ exports.login = function (req, res, next) {
     pauth('local', function (err, user, info) {
         const error = err || info;
         if (error) {
-            return handleLoginError(error, 401, 'Invalid email address or password.', req, res);
+            return handleLoginError(error, 401, __('Invalid email address or password'), req, res);
         }
         if (!user) {
-            return handleLoginError({message: 'User not found.'}, 404, 'Something went wrong, please try again.', req, res);
+            return handleLoginError({message: __('User not found')}, 404, __('Something went wrong, please try again'), req, res);
         }
 
         req.logIn(user, function (err) {
             if (err) {
-                return handleLoginError(err, 500, 'Something went wrong, please try again.', req, res);
+                return handleLoginError(err, 500, __('Something went wrong, please try again'), req, res);
             }
             return handleLoginSuccess(user, req, res);
         });
@@ -161,7 +162,7 @@ exports.logout = function (req, res) {
     });
 
     res.json({
-        message: 'Logged out'
+        message: __('Logged out')
     })
 };
 
@@ -189,7 +190,7 @@ exports.updateProfile = function (req, res) {
     User.findOneAndUpdate(query, newData, {upsert: false}, function (err) {
         if (err) return res.send(500, {err});
         return res.json({
-            message: 'User profile was successfully updated'
+            message: __('User profile was successfully updated')
         });
     });
 };
@@ -226,7 +227,7 @@ exports.addPatient = function (req, res) {
             res.status(400).send(err);
         } else {
             res.json({
-                message: 'Patient was successfully added to database'
+                message: __('Patient was successfully added to database')
             });
         }
     });
