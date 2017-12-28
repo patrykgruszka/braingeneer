@@ -1,3 +1,5 @@
 .idea
 node_modules
 client/public/dist
+server/config/environment/production.js
+server/config/environment/test.js

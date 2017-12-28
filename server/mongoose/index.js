@@ -1,2 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/braingeneer');
+const config = require('../config/environment');
+
+mongoose.connect(config.mongo.url);
