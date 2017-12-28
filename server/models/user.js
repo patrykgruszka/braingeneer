@@ -11,8 +11,8 @@ const Schema = mongoose.Schema;
  * User Schema
  */
 const UserSchema = new Schema({
-    name: {type: String, default: ''},
-    email: {type: String, default: ''},
+    name: {type: String, required: true},
+    email: {type: String},
     role: {type: String, default: 'user'},
 
     supervisor: {type: Schema.Types.ObjectId, ref: 'User'},
@@ -44,6 +44,11 @@ UserSchema
 UserSchema.path('email').validate(function (email) {
     return email.length;
 }, 'Email cannot be blank');
+
+UserSchema.path('email').validate(function (email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email.toLowerCase());
+}, 'Email address must be valid ');
 
 UserSchema.path('email').validate(function (email, fn) {
     const User = mongoose.model('User');

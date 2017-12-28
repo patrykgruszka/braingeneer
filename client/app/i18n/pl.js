@@ -23,12 +23,15 @@ export default {
     },
     'user/Register': {
         pageTitle: 'Rejestracja',
+        name: 'Nazwa',
         email: 'Adres e-mail',
         password: 'Hasło',
+        confirmPassword: 'Potwierdź hasło',
         role: 'Typ konta',
         user: 'Pacjent',
         supervisor: 'Opiekun',
-        submit: 'Zatwierdź'
+        submit: 'Zatwierdź',
+        passwordDoesNotMatch: 'Podane hasła nie są zgodne'
     },
     'user/Profile': {
         profile: 'Profil użytkownika',
@@ -52,7 +55,9 @@ export default {
         name: 'Nazwa',
         email: 'Adres e-mail',
         password: 'Hasło',
-        submit: 'Dodaj'
+        confirmPassword: 'Potwierdź hasło',
+        submit: 'Dodaj',
+        passwordDoesNotMatch: 'Podane hasła nie są zgodne'
     },
     'user/Scores': {
         pageTitle: 'Tabela wyników',

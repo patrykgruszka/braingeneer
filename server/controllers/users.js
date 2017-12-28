@@ -39,7 +39,7 @@ exports.getById = function (req, res) {
         const query = User.findOne({ _id: user });
         query.exec(function (err, docs) {
             if (err) {
-                res.status(500).send({message: 'There was a problem with getting user from the database:' + err});
+                res.status(500).send(err);
             } else {
                 res.json(docs);
             }
@@ -59,13 +59,12 @@ exports.create = function (req, res) {
     const allowedRoles = ['user', 'supervisor'];
 
     if (allowedRoles.indexOf(user.role) !== -1) {
-        user.save(function (error, result) {
-            if (error) {
-                res.status(400).send({message: error});
+        user.save(function (err) {
+            if (err) {
+                res.status(400).send(err);
             } else {
                 res.json({
-                    message: 'User was successfully added to database',
-                    result: result
+                    message: 'User was successfully added to database'
                 });
             }
         });
@@ -188,7 +187,7 @@ exports.updateProfile = function (req, res) {
     };
 
     User.findOneAndUpdate(query, newData, {upsert: false}, function (err) {
-        if (err) return res.send(500, {error: err});
+        if (err) return res.send(500, {err});
         return res.json({
             message: 'User profile was successfully updated'
         });
@@ -205,7 +204,7 @@ exports.myPatients = function (req, res) {
         .find({supervisor: req.user._id})
         .select('name email score')
         .exec(function (err, patients) {
-            if (err) return res.send(500, {error: err});
+            if (err) return res.send(500, {err});
             res.json(patients);
         });
 };
@@ -222,13 +221,12 @@ exports.addPatient = function (req, res) {
     });
 
     const user = new User(userData);
-    user.save(function (error, result) {
-        if (error) {
-            res.status(400).send({message: error});
+    user.save(function (err) {
+        if (err) {
+            res.status(400).send(err);
         } else {
             res.json({
-                message: 'Patient was successfully added to database',
-                result: result
+                message: 'Patient was successfully added to database'
             });
         }
     });
