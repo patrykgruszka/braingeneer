@@ -34,11 +34,6 @@ class Navigation extends React.Component {
 
     render() {
         return (<Navbar inverse={true} className="navigation">
-            <Navbar.Header>
-                <Navbar.Brand>
-                    <Link to="/">Braingeneer</Link>
-                </Navbar.Brand>
-            </Navbar.Header>
             <Nav>
                 <LinkContainer to={{pathname: '/'}}>
                     <NavItem eventKey={1} href="#">{this.props.strings.exercises}</NavItem>

@@ -11,6 +11,7 @@ import Patients from './components/user/Patients';
 import AddPatient from './components/user/AddPatient';
 import UserScores from './components/user/Scores';
 import UserLogs from './components/user/Logs';
+import NotFound from './components/error/NotFound';
 
 render(
     <Router history={browserHistory}>
@@ -24,6 +25,8 @@ render(
         <Route path="/users/:user/scores" component={UserScores}/>
         <Route path="/users/:user/logs" component={UserLogs}/>
         <Route path="/exercise/:exerciseId" component={Exercise}/>
+        <Route path="/404" component={NotFound}/>
+        <Route path="*" component={NotFound}/>
     </Router>,
     document.getElementById('app-container')
 );
