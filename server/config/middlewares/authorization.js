@@ -3,6 +3,12 @@ const config = require('../environment');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
+/**
+ * Checks if role meets requirements
+ * @param role to check
+ * @param roleRequired
+ * @returns {boolean}
+ */
 function meetsRequirements(role, roleRequired) {
     return config.userRoles.indexOf(role) >= config.userRoles.indexOf(roleRequired);
 }
@@ -21,6 +27,12 @@ exports.requiresLogin = function (req, res, next) {
     });
 };
 
+/**
+ * Require admin role middleware
+ * @param req
+ * @param res
+ * @param next
+ */
 exports.hasAdminRole = function (req, res, next) {
     if (meetsRequirements(req.user.role, 'admin')) return next();
 
@@ -29,6 +41,12 @@ exports.hasAdminRole = function (req, res, next) {
     });
 };
 
+/**
+ * Require supervisor role middleware
+ * @param req
+ * @param res
+ * @param next
+ */
 exports.hasSupervisorRole = function (req, res, next) {
     if (meetsRequirements(req.user.role, 'supervisor')) return next();
 

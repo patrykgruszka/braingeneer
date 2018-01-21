@@ -65,12 +65,13 @@ exports.create = function (req, res) {
                 res.status(400).send(err);
             } else {
                 res.json({
-                    message: 'User was successfully added to database'
+                    message: __('User was added to database')
                 });
             }
         });
     } else {
-        res.status(400).send({message: `Role ${user.role} is not allowed`});
+        res.status(400)
+            .send({message: `Role ${user.role} is not allowed`});
     }
 };
 

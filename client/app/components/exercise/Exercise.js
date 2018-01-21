@@ -8,15 +8,12 @@ import request from '../../services/request';
 import Quiz from './quiz/Quiz';
 
 class Exercise extends React.Component {
-
     constructor(props) {
         super(props);
-
         this.state = {
             exercise: {}
-        }
+        };
     }
-
     componentDidMount() {
         const component = this;
 
@@ -32,7 +29,6 @@ class Exercise extends React.Component {
             });
         });
     }
-
     exerciseFactory() {
         switch(this.state.exercise.type) {
             case 'quiz':
@@ -41,7 +37,6 @@ class Exercise extends React.Component {
                 return null;
         }
     }
-
     render(){
         return (<div>
             <Navigation/>

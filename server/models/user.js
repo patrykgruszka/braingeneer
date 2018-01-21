@@ -11,14 +11,13 @@ const __ = require('../i18n/translate');
 /**
  * User Schema
  */
+
 const UserSchema = new Schema({
     name: {type: String, required: true},
     email: {type: String},
     role: {type: String, default: 'user'},
-
     supervisor: {type: Schema.Types.ObjectId, ref: 'User'},
     score: {type: Number, default: 0, min: 0},
-
     // sensitive data
     hashed_password: {type: String, default: ''},
     salt: {type: String, default: ''},
@@ -42,19 +41,19 @@ UserSchema
 /**
  * Validations
  */
+const emailValidationRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 UserSchema.path('email').validate(function (email) {
     return email.length;
 }, __('Email cannot be blank'));
 
 UserSchema.path('email').validate(function (email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email.toLowerCase());
+    return emailValidationRegEx.test(email.toLowerCase());
 }, __('Email address must be valid'));
 
 UserSchema.path('email').validate(function (email, fn) {
     const User = mongoose.model('User');
 
-    // Check only when it is a new user or when email field is modified
+    // check email only if it's a new user or email field is modified
     if (this.isNew || this.isModified('email')) {
         User.find({email: email}).exec(function (err, users) {
             fn(!err && users.length === 0);
@@ -89,20 +88,16 @@ UserSchema.methods = {
 
     /**
      * Authenticate - check if the passwords are the same
-     *
-     * @param {String} plainText
-     * @return {Boolean}
-     * @api public
+     * @param {String} password
+     * @return {Boolean} true if passwords match
      */
-    authenticate: function (plainText) {
-        return this.encryptPassword(plainText) === this.hashed_password;
+    authenticate: function (password) {
+        return this.encryptPassword(password) === this.hashed_password;
     },
 
     /**
      * Make salt
-     *
-     * @return {String}
-     * @api public
+     * @return {String} generated salt
      */
     makeSalt: function () {
         return Math.round((new Date().valueOf() * Math.random())) + '';
@@ -110,10 +105,8 @@ UserSchema.methods = {
 
     /**
      * Encrypt password
-     *
-     * @param {String} password
-     * @return {String}
-     * @api public
+     * @param {String} password unencrypted
+     * @return {String} password encrypted
      */
     encryptPassword: function (password) {
         if (!password) return '';
@@ -138,6 +131,7 @@ UserSchema.statics = {
      *
      * @param {Object} options
      * @param {Function} cb
+     * @returns {Promise}
      * @api private
      */
     load: function (options, cb) {
