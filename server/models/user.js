@@ -14,7 +14,7 @@ const __ = require('../i18n/translate');
 
 const UserSchema = new Schema({
     name: {type: String, required: true},
-    email: {type: String},
+    email: {type: String, required: true},
     role: {type: String, default: 'user'},
     supervisor: {type: Schema.Types.ObjectId, ref: 'User'},
     score: {type: Number, default: 0, min: 0},
