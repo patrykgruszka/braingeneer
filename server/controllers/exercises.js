@@ -26,6 +26,11 @@ exports.list = function (request, response) {
     });
 };
 
+/**
+ * Get single exercise by id
+ * @param req
+ * @param res
+ */
 exports.getById = function (req, res) {
     const exerciseId = req.params.exerciseId || false;
 
